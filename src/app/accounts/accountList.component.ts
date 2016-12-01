@@ -39,12 +39,13 @@ export class AccountListComponent implements OnInit
 
         this.accountService.getAccounts().subscribe(
             response => {
-                for (var account in response)
+                for (let account in response)
                 {
+                    let acc = response[account];
                     this._accountList.push({
                         caption:     account,
                         icon:        'icon-user_my_account',
-                        clickFunction: () => { this.showAccountDetails(response[account]); },
+                        clickFunction: () => { this.showAccountDetails(acc); },
                     });
                 }
 

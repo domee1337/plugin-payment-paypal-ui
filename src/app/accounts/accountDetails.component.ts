@@ -34,7 +34,7 @@ export class AccountDetailsComponent implements OnInit
      */
     ngOnInit()
     {
-        var account = this._permissionService.account;
+        var account = this._permissionService.currentAccount;
         this.email = account.email;
         this.clientId = account.clientId;
         this.clientSecret = account.clientSecret;
