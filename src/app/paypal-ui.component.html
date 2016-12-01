@@ -1,0 +1,16 @@
+<div class="loading" [hidden]="!isLoading">
+    <div class="icon-referrer_backend loading-backend"></div>
+    <div class="loading-text">Loading
+        <span class="dot-one">.</span>
+        <span class="dot-two">.</span>
+        <span class="dot-three">.</span>
+    </div>
+</div>
+<div *ngIf="action == 'permissions'" [hidden]="isLoading">
+    <permissions></permissions>
+</div>
+
+<div *ngIf="action == 'settings'" [hidden]="isLoading">
+    <settings></settings>
+</div>
+

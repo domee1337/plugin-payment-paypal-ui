@@ -1,0 +1,87 @@
+<div style="margin: 15px 5px 5px 0px;">
+    <div class="spacer">
+        <div class="col-lg-12">
+            <terra-base-toolbar>
+                <div class="row">
+                    <div class="col-lg-2">
+                        <terra-button
+                                [inputIsDisabled]="isLoading"
+                                inputCaption="Save"
+                                inputIcon="icon-confirm"
+                                (outputClicked)="saveSettings()">
+                        </terra-button>
+                    </div>
+                    <div class="col-lg-4">
+                        <terra-select-box inputName="webstoreSelect"
+                                          [inputListBoxValues]="webstoreValues"
+                                          inputTooltipText="Webstore"
+                                          inputTooltipPlacement="bottom"
+                                          (outputValueChanged)="changeWebstore($event)"
+                                          [(inputSelectedValue)]="webstore">
+                        </terra-select-box>
+                    </div>
+                    <div class="col-lg-4">
+                        <terra-select-box inputName="language"
+                                          [inputListBoxValues]="languageValues"
+                                          inputTooltipText="Language"
+                                          inputTooltipPlacement="bottom"
+                                          (outputValueChanged)="changeLanguage($event)"
+                                          [(inputSelectedValue)]="lang">
+                        </terra-select-box>
+                    </div>
+                </div>
+            </terra-base-toolbar>
+
+            <div class="row" style="margin-top: 10px">
+                <div class="col-lg-6">
+                    <terra-select-box inputName="priority"
+                                      [inputListBoxValues]="priorityValues"
+                                      inputTooltipText="Priority"
+                                      inputTooltipPlacement="top"
+                                      [(inputSelectedValue)]="priority">
+                    </terra-select-box>
+
+                    Shipping Countries
+                    <terra-multi-select-box [inputValueList]="shippingCountryValues" [inputIsDisabled]="disabled1" [inputIsError]="error1"></terra-multi-select-box>
+
+                    <div class="row">
+                        <div class="input-group-v col-md-6 col-lg-6">
+                            <terra-portlet [inputPortletHeader]="'Aufpreis Webshop'">
+                                <terra-number-input [(ngModel)]="markup.webstore.flatDomestic" inputName="Inland Pauschal"></terra-number-input>
+                                <terra-number-input [(ngModel)]="markup.webstore.percentageDomestic" inputName="Inland Prozentual"></terra-number-input>
+                                <terra-number-input [(ngModel)]="markup.webstore.flatForeign" inputName="Ausland Pauschal"></terra-number-input>
+                                <terra-number-input [(ngModel)]="markup.webstore.percentageForeign" inputName="Ausland Prozentual"></terra-number-input>
+                            </terra-portlet>
+                        </div>
+                        <div class="input-group-v col-md-6 col-lg-6">
+                            <terra-portlet [inputPortletHeader]="'Aufpreis Statistik'">
+                                <terra-number-input [(ngModel)]="markup.statistic.flatDomestic" inputName="Inland Pauschal"></terra-number-input>
+                                <terra-number-input [(ngModel)]="markup.statistic.percentageDomestic" inputName="Inland Prozentual"></terra-number-input>
+                                <terra-number-input [(ngModel)]="markup.statistic.flatForeign" inputName="Ausland Pauschal"></terra-number-input>
+                                <terra-number-input [(ngModel)]="markup.statistic.percentageForeign" inputName="Ausland Prozentual"></terra-number-input>
+                            </terra-portlet>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <terra-text-input [(ngModel)]="name" inputName="Display Name"></terra-text-input>
+
+                    <terra-select-box inputName="infoPage"
+                                      [inputListBoxValues]="infoPageValues"
+                                      inputTooltipText="Language"
+                                      inputTooltipPlacement="top"
+                                      [(inputSelectedValue)]="infoPage">
+                    </terra-select-box>
+
+                    <terra-select-box inputName="logo"
+                                      [inputListBoxValues]="logoValues"
+                                      inputTooltipText="Logo"
+                                      inputTooltipPlacement="top"
+                                      [(inputSelectedValue)]="logo">
+                    </terra-select-box>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
