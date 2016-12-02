@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import { TerraComponentsModule } from '@plentymarkets/terra-components/app';
 import { AccountDetailsComponent } from './accountDetails.component';
+
 @NgModule({
               imports:      [
                   CommonModule,
@@ -17,7 +18,7 @@ export class AccountDetailsModule
     static forRoot():ModuleWithProviders
     {
         return {
-            ngModule:  AccountDetailsModule,
+            ngModule:  AccountDetailsModule
         };
     }
     

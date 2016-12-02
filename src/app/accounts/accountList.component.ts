@@ -1,6 +1,6 @@
 import {
     Component,
-    OnInit
+    OnInit, Injectable
 } from '@angular/core';
 import {
     TerraLeafInterface, TerraSplitViewInterface
@@ -17,7 +17,6 @@ import {PayPalUiComponent} from "../paypal-ui.component";
 })
 export class AccountListComponent implements OnInit
 {
-    private _accountList:Array<TerraLeafInterface> = [];
     private _permissionService;
     private accountService;
     private isLoading:boolean = true;
@@ -35,6 +34,8 @@ export class AccountListComponent implements OnInit
 
     private loadAccountList()
     {
+        this._permissionService.accountList = [];
+
         this.payPalUiComponent.callLoadingEvent(true);
 
         this.accountService.getAccounts().subscribe(
@@ -42,10 +43,10 @@ export class AccountListComponent implements OnInit
                 for (let account in response)
                 {
                     let acc = response[account];
-                    this._accountList.push({
+                    this._permissionService.addAccount({
                         caption:     account,
                         icon:        'icon-user_my_account',
-                        clickFunction: () => { this.showAccountDetails(acc); },
+                        clickFunction: () => { this._permissionService.showAccountDetails(acc); },
                     });
                 }
 
@@ -61,21 +62,5 @@ export class AccountListComponent implements OnInit
                 this.isLoading = false;
             }
         );
-    }
-
-    private showAccountDetails(account:any):void
-    {
-        let details:TerraSplitViewInterface;
-
-        details = {
-            module:            AccountDetailsModule.forRoot(),
-            defaultWidth:      '74%',
-            hidden:            false,
-            name:              AccountDetailsModule.getMainComponent(),
-            mainComponentName: AccountDetailsModule.getMainComponent()
-        };
-
-        this._permissionService.addModule(details);
-        this._permissionService.currentAccount = account;
     }
 }

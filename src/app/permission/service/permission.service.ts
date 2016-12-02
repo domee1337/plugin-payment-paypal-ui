@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
     TerraSplitViewInterface,
-    TerraBaseService, TerraLoadingBarService
+    TerraBaseService, TerraLoadingBarService, TerraLeafInterface
 } from "@plentymarkets/terra-components";
 import {Http} from "@angular/http";
 import {Observable} from "rxjs";
+import {AccountDetailsModule} from "../../accounts/accountDetails.module";
 
 @Injectable()
 export class PermissionService extends TerraBaseService
@@ -16,6 +17,7 @@ export class PermissionService extends TerraBaseService
 
     private _modules:Array<TerraSplitViewInterface> = [];
     private _currentAccount:any;
+    private _accountList:Array<TerraLeafInterface> = [];
 
     public get modules():Array<TerraSplitViewInterface>
     {
@@ -46,6 +48,21 @@ export class PermissionService extends TerraBaseService
         this._currentAccount = account;
     }
 
+    public get accountList():Array<TerraLeafInterface>
+    {
+        return this._accountList;
+    }
+
+    public set accountList(accounts:Array<TerraLeafInterface>)
+    {
+        this._accountList = accounts;
+    }
+
+    public addAccount(account:TerraLeafInterface)
+    {
+        this._accountList.push(account);
+    }
+
     public getAccounts():Observable<any>
     {
         this.setAuthorization();
@@ -71,5 +88,21 @@ export class PermissionService extends TerraBaseService
         return this.mapRequest(
             this.http.post(url, data, {headers: this.headers})
         );
+    }
+
+    public showAccountDetails(account:any):void
+    {
+        let details:TerraSplitViewInterface;
+
+        details = {
+            module:            AccountDetailsModule.forRoot(),
+            defaultWidth:      '74%',
+            hidden:            false,
+            name:              AccountDetailsModule.getMainComponent(),
+            mainComponentName: AccountDetailsModule.getMainComponent()
+        };
+
+        this.addModule(details);
+        this.currentAccount = account;
     }
 }

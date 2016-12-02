@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, forwardRef, Inject} from '@angular/core';
 import { PermissionService } from "./service/permission.service"
 import { AccountListModule } from '../accounts/accountList.module';
 import { PayPalUiComponent } from "../paypal-ui.component";
-import { TerraOverlayComponent } from "@plentymarkets/terra-components";
+import {TerraOverlayComponent, TerraAlertComponent} from "@plentymarkets/terra-components";
 
 @Component({
     selector: 'permissions',
@@ -19,6 +19,8 @@ export class PermissionComponent implements OnInit
     private clientId;
     private clientSecret;
 
+    private alert:TerraAlertComponent = TerraAlertComponent.getInstance();
+
     @ViewChild('viewOverlayPayPalAddAccount') public viewOverlayPayPalAddAccount:TerraOverlayComponent;
 
     constructor(permissionService:PermissionService, private payPalUiComponent:PayPalUiComponent)
@@ -28,14 +30,7 @@ export class PermissionComponent implements OnInit
 
     ngOnInit()
     {
-        this._permissionService.addModule(
-            {
-                module:            AccountListModule.forRoot(),
-                defaultWidth:      '23.0%',
-                hidden:            false,
-                name:              'Konten',
-                mainComponentName: AccountListModule.getMainComponent()
-            });
+        this.loadAccountListModule();
 
         this.payPalUiComponent.callLoadingEvent(false);
         this.payPalUiComponent.isLoading = false;
@@ -46,7 +41,20 @@ export class PermissionComponent implements OnInit
         this.viewOverlayPayPalAddAccount.showOverlay();
     }
 
-    public addPayPalAccount():void
+    public loadAccountListModule():void
+    {
+        this._permissionService.modules = [
+            {
+                module:            AccountListModule.forRoot(),
+                defaultWidth:      '23.0%',
+                hidden:            false,
+                name:              'Konten',
+                mainComponentName: AccountListModule.getMainComponent()
+            }
+        ];
+    }
+
+    public addPayPalAccount(overlay:TerraOverlayComponent):void
     {
         this.isLoading = true;
         this.payPalUiComponent.callLoadingEvent(true);
@@ -61,9 +69,30 @@ export class PermissionComponent implements OnInit
 
         this._permissionService.createAccount(data).subscribe(
             response => {
+
                 this.payPalUiComponent.callStatusEvent('Settings saved successfully', 'success');
                 this.payPalUiComponent.callLoadingEvent(false);
                 this.isLoading = false;
+
+                this.alert.addAlert({
+                    msg:              "Konto erfolgreich hinzugefügt",
+                    closable:         true,
+                    type:             'success',
+                    dismissOnTimeout: 0
+                });
+
+                this._permissionService.accountList = [];
+                for (let account in response)
+                {
+                    let acc = response[account];
+                    this._permissionService.addAccount({
+                        caption:     account,
+                        icon:        'icon-user_my_account',
+                        clickFunction: () => { this._permissionService.showAccountDetails(acc); },
+                    });
+                }
+
+                overlay.hideOverlay();
             },
 
             error => {
@@ -78,5 +107,4 @@ export class PermissionComponent implements OnInit
     {
         overlay.hideOverlay();
     }
-
 }

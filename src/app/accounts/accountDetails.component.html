@@ -1,8 +1,103 @@
-<div class="row">
-    <div class="col-lg-12">
-        <h1>Hier können jede Menge Details über einen Account stehen und Einstellungen vorgenommen werden</h1>
-        <terra-text-input [(ngModel)]="email" inputName="Email"></terra-text-input>
-        <terra-text-input [(ngModel)]="clientId" inputName="Client-ID"></terra-text-input>
-        <terra-text-input [(ngModel)]="clientSecret" inputName="Client-Secret"></terra-text-input>
+<div style="margin: 15px 5px 5px 0px;">
+    <div class="spacer">
+        <div class="col-lg-12">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <terra-base-toolbar>
+                            <terra-button
+                                    [inputIsDisabled]="isLoading"
+                                    inputCaption="Save"
+                                    inputIcon="icon-save"
+                                    (outputClicked)="saveAccount()">
+                            </terra-button>
+                            <terra-button
+                                    [inputIsDisabled]="isLoading"
+                                    inputCaption="Delete"
+                                    inputIcon="icon-delete"
+                                    inputIsAlignRight="true"
+                                    (outputClicked)="deleteAccount()">
+                            </terra-button>
+                        </terra-base-toolbar>
+                    </div>
+                </div>
+            <div class="row" style="margin-top: 10px;">
+                <div class="col-lg-8">
+                    <terra-text-input
+                            inputValue="{{ email }}"
+                            [inputDisabled]="true"
+                            [inputIsRequired]="true"
+                            inputName="Account">
+                    </terra-text-input>
+
+                    <terra-text-input
+                            inputValue="{{ clientId }}"
+                            [inputDisabled]="true"
+                            [inputIsRequired]="true"
+                            inputName="Client-ID">
+                    </terra-text-input>
+
+                    <terra-text-input
+                            inputValue="{{ clientSecret }}"
+                            [inputDisabled]="true"
+                            [inputIsRequired]="true"
+                            inputName="Client-Secret">
+                    </terra-text-input>
+
+                    <terra-select-box inputName="Environment"
+                                      [inputListBoxValues]="environments"
+                                      inputTooltipText="Environment"
+                                      inputTooltipPlacement="top"
+                                      [(inputSelectedValue)]="environment">
+                    </terra-select-box>
+
+                    <terra-text-input
+                            inputName="Logo-URL">
+                    </terra-text-input>
+
+                    <terra-text-input
+                            inputName="Warenkorbumrandung">
+                    </terra-text-input>
+
+                    <terra-select-box inputName="Zeipunkt PayPal Zahlungseinzug"
+                                      [inputListBoxValues]="paymentActionValues"
+                                      inputTooltipText="Zahlungseinzug"
+                                      inputTooltipPlacement="top"
+                                      [(inputSelectedValue)]="paymentAction">
+                    </terra-select-box>
+                </div>
+                <div class="col-lg-4">
+                    <terra-portlet inputPortletHeader="PayPal Express Button">
+                        <div>
+                            <input type="radio" name="ppExpressLogo" id="1" value="1">
+                            <label for="1"><img style="margin-left: 15px;" src="/src/images/buttons/paypal_express_de.png" /></label><br>
+                        </div>
+                        <div>
+                            <input type="radio" name="ppExpressLogo" id="2" value="2">
+                            <label for="2"><img style="margin-left: 15px;" src="/src/images/buttons/paypal_express_en.png" /></label><br>
+                        </div>
+                        <div>
+                            <input type="radio" name="ppExpressLogo" id="3" value="3">
+                            <label for="3"><img style="margin-left: 15px;" src="/src/images/buttons/paypal_express_es.png" /></label><br>
+                        </div>
+                        <div>
+                            <input type="radio" name="ppExpressLogo" id="4" value="4">
+                            <label for="4"><img style="margin-left: 15px;" src="/src/images/buttons/paypal_express_fr.png" /></label><br>
+                        </div>
+                        <div>
+                            <input type="radio" name="ppExpressLogo" id="5" value="5">
+                            <label for="5"><img style="margin-left: 15px;" src="/src/images/buttons/paypal_express_it.png" /></label><br>
+                        </div>
+                        <div>
+                            <input type="radio" name="ppExpressLogo" id="6" value="6">
+                            <label for="6"><img style="margin-left: 15px;" src="/src/images/buttons/paypal_express_nl.png" /></label><br>
+                        </div>
+                        <div>
+                            <input type="radio" name="ppExpressLogo" id="7" value="7">
+                            <label for="7"><img style="margin-left: 15px;" src="/src/images/buttons/paypal_express_pl.png" /></label><br>
+                        </div>
+                    </terra-portlet>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

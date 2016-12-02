@@ -24,4 +24,30 @@ export class AccountService extends TerraBaseService
             this.http.get(url, {headers: this.headers, body: ''})
         );
     }
+
+    public deleteAccount(data:any):Observable<any>
+    {
+        this.setAuthorization();
+
+        let url:string;
+
+        url = this.url + 'payPal/account';
+
+        return this.mapRequest(
+            this.http.delete(url, {headers: this.headers, body: data})
+        );
+    }
+
+    public saveAccount(data:any):Observable<any>
+    {
+        this.setAuthorization();
+
+        let url:string;
+
+        url = this.url + 'payPal/account';
+
+        return this.mapRequest(
+            this.http.put(url, data, {headers: this.headers})
+        );
+    }
 }

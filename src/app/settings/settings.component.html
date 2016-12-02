@@ -7,7 +7,7 @@
                         <terra-button
                                 [inputIsDisabled]="isLoading"
                                 inputCaption="Save"
-                                inputIcon="icon-confirm"
+                                inputIcon="icon-save"
                                 (outputClicked)="saveSettings()">
                         </terra-button>
                     </div>
@@ -47,18 +47,18 @@
                     <div class="row">
                         <div class="input-group-v col-md-6 col-lg-6">
                             <terra-portlet [inputPortletHeader]="'Aufpreis Webshop'">
-                                <terra-number-input [(ngModel)]="markup.webstore.flatDomestic" inputName="Inland Pauschal"></terra-number-input>
-                                <terra-number-input [(ngModel)]="markup.webstore.percentageDomestic" inputName="Inland Prozentual"></terra-number-input>
-                                <terra-number-input [(ngModel)]="markup.webstore.flatForeign" inputName="Ausland Pauschal"></terra-number-input>
-                                <terra-number-input [(ngModel)]="markup.webstore.percentageForeign" inputName="Ausland Prozentual"></terra-number-input>
+                                <terra-double-input [(ngModel)]="markup.webstore.flatDomestic" inputName="Inland Pauschal"></terra-double-input>
+                                <terra-double-input [(ngModel)]="markup.webstore.percentageDomestic" inputName="Inland Prozentual"></terra-double-input>
+                                <terra-double-input [(ngModel)]="markup.webstore.flatForeign" inputName="Ausland Pauschal"></terra-double-input>
+                                <terra-double-input [(ngModel)]="markup.webstore.percentageForeign" inputName="Ausland Prozentual"></terra-double-input>
                             </terra-portlet>
                         </div>
                         <div class="input-group-v col-md-6 col-lg-6">
                             <terra-portlet [inputPortletHeader]="'Aufpreis Statistik'">
-                                <terra-number-input [(ngModel)]="markup.statistic.flatDomestic" inputName="Inland Pauschal"></terra-number-input>
-                                <terra-number-input [(ngModel)]="markup.statistic.percentageDomestic" inputName="Inland Prozentual"></terra-number-input>
-                                <terra-number-input [(ngModel)]="markup.statistic.flatForeign" inputName="Ausland Pauschal"></terra-number-input>
-                                <terra-number-input [(ngModel)]="markup.statistic.percentageForeign" inputName="Ausland Prozentual"></terra-number-input>
+                                <terra-double-input [(ngModel)]="markup.statistic.flatDomestic" inputName="Inland Pauschal"></terra-double-input>
+                                <terra-double-input [(ngModel)]="markup.statistic.percentageDomestic" inputName="Inland Prozentual"></terra-double-input>
+                                <terra-double-input [(ngModel)]="markup.statistic.flatForeign" inputName="Ausland Pauschal"></terra-double-input>
+                                <terra-double-input [(ngModel)]="markup.statistic.percentageForeign" inputName="Ausland Prozentual"></terra-double-input>
                             </terra-portlet>
                         </div>
                     </div>
