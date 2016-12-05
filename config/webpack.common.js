@@ -31,12 +31,6 @@ module.exports = function (options) {
         },
         module: {
             rules: [
-                // {
-                //     enforce: 'pre',
-                //     test: /\.ts$/,
-                //     loader: 'tslint',
-                //     exclude: [/\.(spec|e2e)\.ts$/, /node_modules/]
-                // },
                 {
                     test: /\.ts$/,
                     loaders: [
@@ -50,30 +44,11 @@ module.exports = function (options) {
                     loader: 'html-loader',
                     exclude: [helpers.root('src/index.html')]
                 },
-                // {
-                //     test: /\.css$/,
-                //     exclude: helpers.root('src', 'app'),
-                //     loader: ExtractTextPlugin
-                //         .extract({
-                //             fallbackLoader: "style-loader",
-                //             loader: ['css', 'postcss']
-                //         })
-                // },
-                // {
-                //     test: /\.css$/,
-                //     include: helpers.root('src', 'app'),
-                //     loader: 'raw!postcss'
-                // },
                 {
                     test: /\.scss$/,
                     use: [
                         'style-loader',
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 1
-                            }
-                        },
+                        'css-loader',
                         'postcss-loader',
                         'sass-loader',
                         'sass-resources-loader'
