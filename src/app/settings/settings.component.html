@@ -41,8 +41,12 @@
                                       [(inputSelectedValue)]="priority">
                     </terra-select-box>
 
-                    Shipping Countries
-                    <terra-multi-select-box [inputValueList]="shippingCountryValues" [inputIsDisabled]="disabled1" [inputIsError]="error1"></terra-multi-select-box>
+                    <terra-multi-select-box
+                            [inputValueList]="shippingCountryValues"
+                            [inputIsError]="error1"
+                            [inputName]="'Shipping Countries'"
+                            [(inputSelectedValueList)]="shippingCountries">
+                    </terra-multi-select-box>
 
                     <div class="row">
                         <div class="input-group-v col-md-6 col-lg-6">

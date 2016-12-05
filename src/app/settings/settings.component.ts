@@ -37,6 +37,7 @@ export class SettingsComponent implements OnInit {
     private infoPageValues:Array<TerraSelectBoxValueInterface>;
     private logoValues:Array<TerraSelectBoxValueInterface>;
     private shippingCountryValues:Array<TerraMultiSelectBoxValueInterface> = [];
+    private shippingCountries:Array<any> = [];
     private priorityValues:Array<TerraSelectBoxValueInterface>;
     private webstoreValues:Array<TerraSelectBoxValueInterface> = [];
 
@@ -146,8 +147,8 @@ export class SettingsComponent implements OnInit {
      */
     ngOnInit() {
         this.loadWebstores();
-        this.loadSettings();
         this.loadShippingCountries();
+        this.loadSettings();
     }
 
     public loadWebstores()
@@ -206,18 +207,21 @@ export class SettingsComponent implements OnInit {
     {
         this.payPalUiComponent.callLoadingEvent(true);
 
+        var value = [];
         this.service.getShippingCountries().subscribe(
             response => {
                 response.forEach((shipping) => {
                     if(shipping['active'] == 1)
                     {
-                        this.shippingCountryValues.push({
+                        value.push({
                             value:      shipping['id'],
                             caption:    shipping['name'],
                             selected:   false
                         });
                     }
                 });
+
+                this.shippingCountryValues = value;
 
                 this.payPalUiComponent.callLoadingEvent(false);
                 this.payPalUiComponent.isLoading = false;
@@ -273,7 +277,7 @@ export class SettingsComponent implements OnInit {
 
                     if('shippingCountries' in aktStore)
                     {
-//                        settings.webstore[aktStore].shippingCountries = aktStore.shippingCountries;
+                        settings.webstore[store].shippingCountries = aktStore.shippingCountries;
                     }
 
                     if('language' in aktStore)
@@ -427,7 +431,7 @@ export class SettingsComponent implements OnInit {
          * General settings
          */
         this.settings.webstore["PID_" + this.webstore].priority = this.priority;
-        this.settings.webstore["PID_" + this.webstore].shippingCountries = this.getSelectedShippingCountries();
+        this.settings.webstore["PID_" + this.webstore].shippingCountries = this.shippingCountries;
 
     }
 
@@ -494,6 +498,8 @@ export class SettingsComponent implements OnInit {
                         percentageForeign: this.settings.webstore[store].markup.statistic.percentageForeign,
                     }
             };
+
+            this.shippingCountries = this.settings.webstore[store].shippingCountries;
 
             if(this.lang in this.settings.webstore[store].language)
             {
