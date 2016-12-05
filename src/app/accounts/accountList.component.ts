@@ -1,28 +1,33 @@
 import {
     Component,
-    OnInit, Injectable
+    OnInit
 } from '@angular/core';
-import {
-    TerraLeafInterface, TerraSplitViewInterface
-} from '@plentymarkets/terra-components/index';
-import {PermissionService} from "../permission/service/permission.service";
-import {AccountDetailsModule} from "./accountDetails.module";
-import {AccountService} from "./service/account.service";
-import {PayPalUiComponent} from "../paypal-ui.component";
+import { PermissionService } from "../permission/service/permission.service";
+import { AccountService } from "./service/account.service";
+import { PayPalUiComponent } from "../paypal-ui.component";
+import { Locale } from "angular2localization";
+import { LocaleService } from "angular2localization/angular2localization";
+import { LocalizationService } from "angular2localization/angular2localization";
 
 @Component({
     selector: 'accountList',
     template: require('./accountList.component.html'),
     styles: [require('./accountList.component.scss').toString()]
 })
-export class AccountListComponent implements OnInit
+export class AccountListComponent extends Locale implements OnInit
 {
     private _permissionService;
     private accountService;
     private isLoading:boolean = true;
 
-    constructor(permissionService:PermissionService, accountService:AccountService, private payPalUiComponent:PayPalUiComponent)
+    constructor(    permissionService:PermissionService,
+                    accountService:AccountService,
+                    private payPalUiComponent:PayPalUiComponent,
+                    locale:LocaleService,
+                    localization:LocalizationService)
     {
+        super(locale, localization);
+
         this._permissionService = permissionService;
         this.accountService = accountService;
     }
@@ -57,7 +62,7 @@ export class AccountListComponent implements OnInit
 
             error => {
                 this.payPalUiComponent.callLoadingEvent(false);
-                this.payPalUiComponent.callStatusEvent('Could not load settings: ' + error.statusText, 'danger');
+                this.payPalUiComponent.callStatusEvent(this.localization.translate('errorLoadAccounts') + ': ' + error.statusText, 'danger');
                 this.payPalUiComponent.isLoading = false;
                 this.isLoading = false;
             }

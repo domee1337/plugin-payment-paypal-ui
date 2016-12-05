@@ -1,5 +1,7 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { Locale } from 'angular2localization';
+import { LocaleService } from "angular2localization/angular2localization";
+import { LocalizationService } from "angular2localization/angular2localization";
 
 @Component({
                selector:        'paypal-ui',
@@ -13,7 +15,32 @@ export class PayPalUiComponent extends Locale
     private action:any = this.getUrlVars()['action'];
     private _isLoading = true;
 
-    private getUrlVars() {
+    constructor(locale:LocaleService, localization:LocalizationService)
+    {
+        super(locale, localization);
+
+        //Definitions for i18n
+        if(process.env.ENV === 'production')
+        {
+            this.localization.translationProvider('locale_');
+        }
+        else
+        {
+            this.localization.translationProvider('src/app/assets/lang/locale_');
+        }
+
+        // this.locale.addLanguage('de');
+        this.locale.addLanguage('en');
+        this.locale.definePreferredLocale('en', 'EN', 30); //default language is en
+
+        let langInLocalStorage:string = localStorage.getItem('plentymarkets_lang_') || 'de';
+
+        this.locale.setCurrentLocale(langInLocalStorage, langInLocalStorage.toUpperCase());
+        this.localization.updateTranslation();
+    }
+
+    private getUrlVars()
+    {
         var vars = {};
 
         window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function (substring: string, ...args: any[]): string {
@@ -24,7 +51,8 @@ export class PayPalUiComponent extends Locale
         return vars;
     }
 
-    public reload() {
+    public reload()
+    {
         location.reload();
     }
 

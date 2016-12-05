@@ -6,13 +6,13 @@
                         <terra-base-toolbar>
                             <terra-button
                                     [inputIsDisabled]="isLoading"
-                                    inputCaption="Save"
+                                    inputCaption="{{ 'save' | translate:lang }}"
                                     inputIcon="icon-save"
                                     (outputClicked)="saveAccount()">
                             </terra-button>
                             <terra-button
                                     [inputIsDisabled]="isLoading"
-                                    inputCaption="Delete"
+                                    inputCaption="{{ 'delete' | translate:lang }}"
                                     inputIcon="icon-delete"
                                     inputIsAlignRight="true"
                                     (outputClicked)="deleteAccount()">
@@ -26,47 +26,47 @@
                             inputValue="{{ email }}"
                             [inputDisabled]="true"
                             [inputIsRequired]="true"
-                            inputName="Account">
+                            inputName="{{ 'account' | translate:lang }}">
                     </terra-text-input>
 
                     <terra-text-input
                             inputValue="{{ clientId }}"
                             [inputDisabled]="true"
                             [inputIsRequired]="true"
-                            inputName="Client-ID">
+                            inputName="{{ 'clientId' | translate:lang }}">
                     </terra-text-input>
 
                     <terra-text-input
                             inputValue="{{ clientSecret }}"
                             [inputDisabled]="true"
                             [inputIsRequired]="true"
-                            inputName="Client-Secret">
+                            inputName="{{ 'clientSecret' | translate:lang }}">
                     </terra-text-input>
 
-                    <terra-select-box inputName="Environment"
+                    <terra-select-box inputName="{{ 'environment' | translate:lang }}"
                                       [inputListBoxValues]="environments"
-                                      inputTooltipText="Environment"
+                                      inputTooltipText="{{ 'environment' | translate:lang }}"
                                       inputTooltipPlacement="top"
                                       [(inputSelectedValue)]="environment">
                     </terra-select-box>
 
                     <terra-text-input
-                            inputName="Logo-URL">
+                            inputName="{{ 'logoUrl' | translate:lang }}">
                     </terra-text-input>
 
                     <terra-text-input
-                            inputName="Warenkorbumrandung">
+                            inputName="{{ 'basketColor' | translate:lang }}">
                     </terra-text-input>
 
-                    <terra-select-box inputName="Zeipunkt PayPal Zahlungseinzug"
+                    <terra-select-box inputName="{{ 'paymentAction' | translate:lang }}"
                                       [inputListBoxValues]="paymentActionValues"
-                                      inputTooltipText="Zahlungseinzug"
+                                      inputTooltipText="{{ 'paymentEntry' | translate:lang }}"
                                       inputTooltipPlacement="top"
                                       [(inputSelectedValue)]="paymentAction">
                     </terra-select-box>
                 </div>
                 <div class="col-lg-4">
-                    <terra-portlet inputPortletHeader="PayPal Express Button">
+                    <terra-portlet inputPortletHeader="{{ 'expressButton' | translate:lang }}">
                         <div>
                             <input type="radio" name="ppExpressLogo" id="1" value="1">
                             <label for="1"><img style="margin-left: 15px;" src="/src/images/buttons/paypal_express_de.png" /></label><br>

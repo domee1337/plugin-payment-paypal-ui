@@ -1,25 +1,31 @@
-import {Component, OnInit, forwardRef, Inject, ViewChild} from '@angular/core';
 import {
-} from '@plentymarkets/terra-components/index';
+    Component,
+    OnInit,
+    forwardRef,
+    Inject
+} from '@angular/core';
 import { AccountService } from "./service/account.service"
 import { PayPalUiComponent } from "../paypal-ui.component";
 import { PermissionService } from "../permission/service/permission.service";
 import { TerraSelectBoxValueInterface } from "@plentymarkets/terra-components";
+import { Locale } from "angular2localization";
+import { LocaleService } from "angular2localization/angular2localization";
+import { LocalizationService } from "angular2localization/angular2localization";
 
 @Component({
     selector: 'accountDetails',
     template: require('./accountDetails.component.html'),
     styles: [require('./accountDetails.component.scss').toString()]
 })
-export class AccountDetailsComponent implements OnInit
+export class AccountDetailsComponent extends Locale implements OnInit
 {
     private service:AccountService;
     private isLoading:boolean = true;
     private _permissionService;
 
-    private email = "1";
-    private clientId = "2";
-    private clientSecret = "3";
+    private email;
+    private clientId;
+    private clientSecret;
 
     private paymentAction;
     private paymentActionValues:Array<TerraSelectBoxValueInterface>;
@@ -29,35 +35,39 @@ export class AccountDetailsComponent implements OnInit
     private basket;
     private expressButton;
 
-    constructor(    private S:AccountService,
+    constructor(    private accountService:AccountService,
                     @Inject(forwardRef(() => PermissionService)) permissionService:PermissionService,
-                    @Inject(forwardRef(() => PayPalUiComponent)) private payPalUiComponent:PayPalUiComponent)
+                    @Inject(forwardRef(() => PayPalUiComponent)) private payPalUiComponent:PayPalUiComponent,
+                    locale:LocaleService,
+                    localization:LocalizationService)
     {
-        this.service = S;
+        super(locale, localization);
+
+        this.service = accountService;
         this._permissionService = permissionService;
 
         this.paymentActionValues = [
             {
-                caption:    "Sale (sofortiger Zahlungseinzug)",
+                caption:    this.localization.translate('sale'),
                 value:      "Sale"
             },
             {
-                caption:    "Authorization & Capture",
+                caption:    this.localization.translate('authorization'),
                 value:      "Authorization"
             },
             {
-                caption:    "Order (OrderAuthCapture-Verfahren)",
+                caption:    this.localization.translate('order'),
                 value:      "Order"
             }
         ];
 
         this.environments = [
             {
-                caption:    "Sandbox",
+                caption:    this.localization.translate('sandbox'),
                 value:      1
             },
             {
-                caption:    "Live",
+                caption:    this.localization.translate('live'),
                 value:      0
             }
         ];
@@ -103,13 +113,13 @@ export class AccountDetailsComponent implements OnInit
 
         this.service.saveAccount(data).subscribe(
             response => {
-                this.payPalUiComponent.callStatusEvent('Account delete successfully', 'success');
+                this.payPalUiComponent.callStatusEvent(this.localization.translate('successSaveAccount'), 'success');
                 this.payPalUiComponent.callLoadingEvent(false);
                 this.isLoading = false;
             },
 
             error => {
-                this.payPalUiComponent.callStatusEvent('Could not delete account: ' + error.statusText, 'danger');
+                this.payPalUiComponent.callStatusEvent(this.localization.translate('errorSaveAccount') + ': ' + error.statusText, 'danger');
                 this.payPalUiComponent.callLoadingEvent(false);
                 this.isLoading = false;
             }
@@ -139,13 +149,13 @@ export class AccountDetailsComponent implements OnInit
 
                 this._permissionService.modules.pop();
 
-                this.payPalUiComponent.callStatusEvent('Account delete successfully', 'success');
+                this.payPalUiComponent.callStatusEvent(this.localization.translate('successDeleteAccount'), 'success');
                 this.payPalUiComponent.callLoadingEvent(false);
                 this.isLoading = false;
             },
 
             error => {
-                this.payPalUiComponent.callStatusEvent('Could not delete account: ' + error.statusText, 'danger');
+                this.payPalUiComponent.callStatusEvent(this.localization.translate('errorDeleteAccount') + ': ' + error.statusText, 'danger');
                 this.payPalUiComponent.callLoadingEvent(false);
                 this.isLoading = false;
             }

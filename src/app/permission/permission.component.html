@@ -4,7 +4,7 @@
             <terra-base-toolbar>
                 <terra-button [inputIsLarge]="true"
                               [inputIsPrimary]="true"
-                              inputCaption="Ein neues PayPal Konto hinzufügen"
+                              inputCaption="{{ 'addNewPayPalAccount' | translate:lang }}"
                               inputIcon="icon-add"
                               (outputClicked)="openOverlayPayPalAddAccount()"></terra-button>
             </terra-base-toolbar>
@@ -17,9 +17,9 @@
 
         <terra-overlay
                 #viewOverlayPayPalAddAccount
-                [inputAddButtonTooltip]="'Account hinzufügen'"
-                [inputCancelButtonTooltip]="'Close'"
-                inputOverlayTitle="Ein neues PayPal Konto hinzufügen"
+                inputAddButtonTooltip="{{ 'addAccount' | translate:lang }}"
+                inputCancelButtonTooltip="{{ 'close' | translate:lang }}"
+                inputOverlayTitle="{{ 'addNewPayPalAccount' | translate:lang }}"
                 [inputHasPrimaryButton]="true"
                 [inputHasSecondaryButton]="true"
                 (outputPrimaryButtonClicked)="addPayPalAccount($event)"
@@ -27,9 +27,9 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <terra-text-input [(ngModel)]="email" inputName="Email"></terra-text-input>
-                    <terra-text-input [(ngModel)]="clientId" inputName="Client-ID"></terra-text-input>
-                    <terra-text-input [(ngModel)]="clientSecret" inputName="Client-Secret"></terra-text-input>
+                    <terra-text-input [(ngModel)]="email" inputName="{{ 'email' | translate:lang }}"></terra-text-input>
+                    <terra-text-input [(ngModel)]="clientId" inputName="{{ 'clientId' | translate:lang }}"></terra-text-input>
+                    <terra-text-input [(ngModel)]="clientSecret" inputName="{{ 'clientSecret' | translate:lang }}"></terra-text-input>
                 </div>
             </div>
         </terra-overlay>

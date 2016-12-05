@@ -6,27 +6,27 @@
                     <div class="col-lg-2">
                         <terra-button
                                 [inputIsDisabled]="isLoading"
-                                inputCaption="Save"
+                                inputCaption="{{ 'save' | translate:lang }}"
                                 inputIcon="icon-save"
                                 (outputClicked)="saveSettings()">
                         </terra-button>
                     </div>
                     <div class="col-lg-4">
-                        <terra-select-box inputName="webstoreSelect"
+                        <terra-select-box inputName="{{ 'webstores' | translate:lang }}"
                                           [inputListBoxValues]="webstoreValues"
-                                          inputTooltipText="Webstore"
+                                          inputTooltipText="{{ 'webstores' | translate:lang }}"
                                           inputTooltipPlacement="bottom"
                                           (outputValueChanged)="changeWebstore($event)"
                                           [(inputSelectedValue)]="webstore">
                         </terra-select-box>
                     </div>
                     <div class="col-lg-4">
-                        <terra-select-box inputName="language"
+                        <terra-select-box inputName="{{ 'language' | translate:lang }}"
                                           [inputListBoxValues]="languageValues"
-                                          inputTooltipText="Language"
+                                          inputTooltipText="{{ 'language' | translate:lang }}"
                                           inputTooltipPlacement="bottom"
                                           (outputValueChanged)="changeLanguage($event)"
-                                          [(inputSelectedValue)]="lang">
+                                          [(inputSelectedValue)]="selectLang">
                         </terra-select-box>
                     </div>
                 </div>
@@ -34,9 +34,9 @@
 
             <div class="row" style="margin-top: 10px">
                 <div class="col-lg-6">
-                    <terra-select-box inputName="priority"
+                    <terra-select-box inputName="{{ 'priority' | translate:lang }}"
                                       [inputListBoxValues]="priorityValues"
-                                      inputTooltipText="Priority"
+                                      inputTooltipText="{{ 'priority' | translate:lang }}"
                                       inputTooltipPlacement="top"
                                       [(inputSelectedValue)]="priority">
                     </terra-select-box>
@@ -44,43 +44,43 @@
                     <terra-multi-select-box
                             [inputValueList]="shippingCountryValues"
                             [inputIsError]="error1"
-                            [inputName]="'Shipping Countries'"
+                            inputName="{{ 'shippingCountries' | translate:lang }}"
                             [(inputSelectedValueList)]="shippingCountries">
                     </terra-multi-select-box>
 
                     <div class="row">
                         <div class="input-group-v col-md-6 col-lg-6">
-                            <terra-portlet [inputPortletHeader]="'Aufpreis Webshop'">
-                                <terra-double-input [(ngModel)]="markup.webstore.flatDomestic" inputName="Inland Pauschal"></terra-double-input>
-                                <terra-double-input [(ngModel)]="markup.webstore.percentageDomestic" inputName="Inland Prozentual"></terra-double-input>
-                                <terra-double-input [(ngModel)]="markup.webstore.flatForeign" inputName="Ausland Pauschal"></terra-double-input>
-                                <terra-double-input [(ngModel)]="markup.webstore.percentageForeign" inputName="Ausland Prozentual"></terra-double-input>
+                            <terra-portlet inputPortletHeader="{{ 'markupWebstore' | translate:lang }}">
+                                <terra-double-input [(ngModel)]="markup.webstore.flatDomestic" inputName="{{ 'flatDomestic' | translate:lang }}"></terra-double-input>
+                                <terra-double-input [(ngModel)]="markup.webstore.percentageDomestic" inputName="{{ 'percentageDomestic' | translate:lang }}"></terra-double-input>
+                                <terra-double-input [(ngModel)]="markup.webstore.flatForeign" inputName="{{ 'flatForeign' | translate:lang }}"></terra-double-input>
+                                <terra-double-input [(ngModel)]="markup.webstore.percentageForeign" inputName="{{ 'percentageForeign' | translate:lang }}"></terra-double-input>
                             </terra-portlet>
                         </div>
                         <div class="input-group-v col-md-6 col-lg-6">
-                            <terra-portlet [inputPortletHeader]="'Aufpreis Statistik'">
-                                <terra-double-input [(ngModel)]="markup.statistic.flatDomestic" inputName="Inland Pauschal"></terra-double-input>
-                                <terra-double-input [(ngModel)]="markup.statistic.percentageDomestic" inputName="Inland Prozentual"></terra-double-input>
-                                <terra-double-input [(ngModel)]="markup.statistic.flatForeign" inputName="Ausland Pauschal"></terra-double-input>
-                                <terra-double-input [(ngModel)]="markup.statistic.percentageForeign" inputName="Ausland Prozentual"></terra-double-input>
+                            <terra-portlet inputPortletHeader="{{ 'markupStatistic' | translate:lang }}">
+                                <terra-double-input [(ngModel)]="markup.statistic.flatDomestic" inputName="{{ 'flatDomestic' | translate:lang }}"></terra-double-input>
+                                <terra-double-input [(ngModel)]="markup.statistic.percentageDomestic" inputName="{{ 'percentageDomestic' | translate:lang }}"></terra-double-input>
+                                <terra-double-input [(ngModel)]="markup.statistic.flatForeign" inputName="{{ 'flatForeign' | translate:lang }}"></terra-double-input>
+                                <terra-double-input [(ngModel)]="markup.statistic.percentageForeign" inputName="{{ 'percentageForeign' | translate:lang }}"></terra-double-input>
                             </terra-portlet>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-lg-6">
-                    <terra-text-input [(ngModel)]="name" inputName="Display Name"></terra-text-input>
+                    <terra-text-input [(ngModel)]="name" inputName="{{ 'displayName' | translate:lang }}"></terra-text-input>
 
-                    <terra-select-box inputName="infoPage"
+                    <terra-select-box inputName="{{ 'infoPage' | translate:lang }}"
                                       [inputListBoxValues]="infoPageValues"
-                                      inputTooltipText="Language"
+                                      inputTooltipText="{{ 'infoPage' | translate:lang }}"
                                       inputTooltipPlacement="top"
                                       [(inputSelectedValue)]="infoPage">
                     </terra-select-box>
 
-                    <terra-select-box inputName="logo"
+                    <terra-select-box inputName="{{ 'logo' | translate:lang }}"
                                       [inputListBoxValues]="logoValues"
-                                      inputTooltipText="Logo"
+                                      inputTooltipText="{{ 'logo' | translate:lang }}"
                                       inputTooltipPlacement="top"
                                       [(inputSelectedValue)]="logo">
                     </terra-select-box>

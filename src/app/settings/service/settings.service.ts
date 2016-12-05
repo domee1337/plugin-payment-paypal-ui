@@ -11,7 +11,8 @@ export class SettingsService extends TerraBaseService
         super(loadingBarService, http, 'http://master.plentymarkets.com/');
     }
 
-    public getSettings():Observable<any> {
+    public getSettings():Observable<any>
+    {
         this.setAuthorization();
 
         let url:string;
@@ -23,7 +24,8 @@ export class SettingsService extends TerraBaseService
         );
     }
 
-    public saveSettings(data:any):Observable<any> {
+    public saveSettings(data:any):Observable<any>
+    {
         this.setAuthorization();
 
         let url:string;
@@ -35,7 +37,8 @@ export class SettingsService extends TerraBaseService
         );
     }
 
-    public getWebstores():Observable<any> {
+    public getWebstores():Observable<any>
+    {
         this.setAuthorization();
 
         let url:string;
@@ -50,7 +53,8 @@ export class SettingsService extends TerraBaseService
     }
 
 
-    public getShippingCountries():Observable<any> {
+    public getShippingCountries():Observable<any>
+    {
         this.setAuthorization();
 
         let url:string;

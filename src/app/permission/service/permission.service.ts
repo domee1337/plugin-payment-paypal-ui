@@ -1,23 +1,25 @@
 import { Injectable } from '@angular/core';
 import {
     TerraSplitViewInterface,
-    TerraBaseService, TerraLoadingBarService, TerraLeafInterface
+    TerraBaseService,
+    TerraLoadingBarService,
+    TerraLeafInterface
 } from "@plentymarkets/terra-components";
-import {Http} from "@angular/http";
-import {Observable} from "rxjs";
-import {AccountDetailsModule} from "../../accounts/accountDetails.module";
+import { Http } from "@angular/http";
+import { Observable } from "rxjs";
+import { AccountDetailsModule } from "../../accounts/accountDetails.module";
 
 @Injectable()
 export class PermissionService extends TerraBaseService
 {
+    private _modules:Array<TerraSplitViewInterface> = [];
+    private _currentAccount:any;
+    private _accountList:Array<TerraLeafInterface> = [];
+
     constructor(loadingBarService:TerraLoadingBarService, http:Http)
     {
         super(loadingBarService, http, 'http://master.plentymarkets.com/');
     }
-
-    private _modules:Array<TerraSplitViewInterface> = [];
-    private _currentAccount:any;
-    private _accountList:Array<TerraLeafInterface> = [];
 
     public get modules():Array<TerraSplitViewInterface>
     {

@@ -5,6 +5,7 @@ import {
 } from '@angular/core';
 import { TerraComponentsModule } from '@plentymarkets/terra-components/app';
 import { AccountListComponent } from './accountList.component';
+
 @NgModule({
               imports:      [
                   CommonModule,

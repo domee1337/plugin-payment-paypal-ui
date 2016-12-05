@@ -1,8 +1,15 @@
-import {Component, OnInit, ViewChild, forwardRef, Inject} from '@angular/core';
+import {
+    Component,
+    OnInit,
+    ViewChild
+} from '@angular/core';
 import { PermissionService } from "./service/permission.service"
 import { AccountListModule } from '../accounts/accountList.module';
 import { PayPalUiComponent } from "../paypal-ui.component";
-import {TerraOverlayComponent, TerraAlertComponent} from "@plentymarkets/terra-components";
+import { TerraOverlayComponent, TerraAlertComponent } from "@plentymarkets/terra-components";
+import { Locale } from "angular2localization";
+import { LocaleService } from "angular2localization/angular2localization";
+import { LocalizationService } from "angular2localization/angular2localization";
 
 @Component({
     selector: 'permissions',
@@ -10,7 +17,7 @@ import {TerraOverlayComponent, TerraAlertComponent} from "@plentymarkets/terra-c
     styles: [require('./permission.component.scss').toString()]
 })
 
-export class PermissionComponent implements OnInit
+export class PermissionComponent extends Locale implements OnInit
 {
     private _permissionService;
     private isLoading:boolean = true;
@@ -23,8 +30,13 @@ export class PermissionComponent implements OnInit
 
     @ViewChild('viewOverlayPayPalAddAccount') public viewOverlayPayPalAddAccount:TerraOverlayComponent;
 
-    constructor(permissionService:PermissionService, private payPalUiComponent:PayPalUiComponent)
+    constructor(    permissionService:PermissionService,
+                    private payPalUiComponent:PayPalUiComponent,
+                    locale:LocaleService,
+                    localization:LocalizationService)
     {
+        super(locale, localization);
+
         this._permissionService = permissionService;
     }
 
@@ -48,7 +60,7 @@ export class PermissionComponent implements OnInit
                 module:            AccountListModule.forRoot(),
                 defaultWidth:      '23.0%',
                 hidden:            false,
-                name:              'Konten',
+                name:              this.localization.translate('accounts'),
                 mainComponentName: AccountListModule.getMainComponent()
             }
         ];
@@ -70,12 +82,12 @@ export class PermissionComponent implements OnInit
         this._permissionService.createAccount(data).subscribe(
             response => {
 
-                this.payPalUiComponent.callStatusEvent('Settings saved successfully', 'success');
+                this.payPalUiComponent.callStatusEvent(this.localization.translate('successCreateAccount'), 'success');
                 this.payPalUiComponent.callLoadingEvent(false);
                 this.isLoading = false;
 
                 this.alert.addAlert({
-                    msg:              "Konto erfolgreich hinzugefügt",
+                    msg:              this.localization.translate('addAccountSuccessfully'),
                     closable:         true,
                     type:             'success',
                     dismissOnTimeout: 0
@@ -96,7 +108,7 @@ export class PermissionComponent implements OnInit
             },
 
             error => {
-                this.payPalUiComponent.callStatusEvent('Could not save settings: ' + error.statusText, 'danger');
+                this.payPalUiComponent.callStatusEvent(this.localization.translate('errorCreateAccount') + ': ' + error.statusText, 'danger');
                 this.payPalUiComponent.callLoadingEvent(false);
                 this.isLoading = false;
             }

@@ -2,27 +2,25 @@ import {Component, OnInit, forwardRef, Inject, ViewChild} from '@angular/core';
 import {
     TerraMultiSelectBoxValueInterface,
     TerraSelectBoxValueInterface,
-    TerraSimpleTableComponent,
-    TerraSimpleTableHeaderCellInterface,
-    TerraSimpleTableRowInterface,
-    TerraSimpleTableCellInterface, TerraSelectBoxComponent, TerraPortletComponent
 } from '@plentymarkets/terra-components/index';
 import { SettingsService } from "./service/settings.service";
 import { PayPalUiComponent } from "../paypal-ui.component";
 import set = Reflect.set;
-import {isIP} from "net";
-import {isUndefined} from "util";
+import { Locale } from 'angular2localization';
+import { LocaleService } from "angular2localization/angular2localization";
+import { LocalizationService } from "angular2localization/angular2localization";
 
 @Component({
     selector: 'settings',
     template: require('./settings.component.html'),
     styles: [require('./settings.component.scss').toString()]
 })
-export class SettingsComponent implements OnInit {
+export class SettingsComponent extends Locale implements OnInit
+{
     private service:SettingsService;
     private settings;
 
-    private lang = 'de';
+    private selectLang = 'de';
     private webstore = 1000;
     private name;
     private logo;
@@ -41,8 +39,14 @@ export class SettingsComponent implements OnInit {
     private priorityValues:Array<TerraSelectBoxValueInterface>;
     private webstoreValues:Array<TerraSelectBoxValueInterface> = [];
 
-    constructor(private S:SettingsService, @Inject(forwardRef(() => PayPalUiComponent)) private payPalUiComponent:PayPalUiComponent) {
-        this.service = S;
+    constructor(    private settingsService:SettingsService,
+                    @Inject(forwardRef(() => PayPalUiComponent)) private payPalUiComponent:PayPalUiComponent,
+                    locale:LocaleService,
+                    localization:LocalizationService)
+    {
+        super(locale, localization);
+
+        this.service = settingsService;
 
         this.settings =
             {
@@ -69,19 +73,19 @@ export class SettingsComponent implements OnInit {
         this.languageValues = [
             {
                 value:      'de',
-                caption:    'German',
+                caption:    this.localization.translate('german'),
             },
             {
                 value:      'en',
-                caption:    'English'
+                caption:    this.localization.translate('english')
             },
             {
                 value:      'fr',
-                caption:    'French'
+                caption:    this.localization.translate('french')
             },
             {
                 value:      'es',
-                caption:    'Spanish'
+                caption:    this.localization.translate('spanish')
             }
         ];
 
@@ -92,26 +96,26 @@ export class SettingsComponent implements OnInit {
             },
             {
                 value:      '1',
-                caption:    'internal info page'
+                caption:    this.localization.translate('internalInfoPage')
             },
             {
                 value:      '2',
-                caption:    'external info page'
+                caption:    this.localization.translate('externalInfoPage')
             }
         ];
 
         this.logoValues = [
             {
                 value:      '0',
-                caption:    'Show default logo'
+                caption:    this.localization.translate('showDefaultLogo')
             },
             {
                 value:      '1',
-                caption:    'Show uploaded logo'
+                caption:    this.localization.translate('showUploadedLogo')
             },
             {
                 value:      '2',
-                caption:    'Do not show logo'
+                caption:    this.localization.translate('donotShowLogo')
             }
         ];
 
@@ -145,7 +149,8 @@ export class SettingsComponent implements OnInit {
      * first time, and before any of its children have been checked. It is invoked only once when the
      * directive is instantiated.
      */
-    ngOnInit() {
+    ngOnInit()
+    {
         this.loadWebstores();
         this.loadShippingCountries();
         this.loadSettings();
@@ -174,7 +179,7 @@ export class SettingsComponent implements OnInit {
 
             error => {
                 this.payPalUiComponent.callLoadingEvent(false);
-                this.payPalUiComponent.callStatusEvent('Could not load settings: ' + error.statusText, 'danger');
+                this.payPalUiComponent.callStatusEvent(this.localization.translate('errorLoadWebstores') + ': ' + error.statusText, 'danger');
                 this.payPalUiComponent.isLoading = false;
                 this.isLoading = false;
             }
@@ -196,7 +201,7 @@ export class SettingsComponent implements OnInit {
 
             error => {
                 this.payPalUiComponent.callLoadingEvent(false);
-                this.payPalUiComponent.callStatusEvent('Could not load settings: ' + error.statusText, 'danger');
+                this.payPalUiComponent.callStatusEvent(this.localization.translate('errorLoadSettings') + ': ' + error.statusText, 'danger');
                 this.payPalUiComponent.isLoading = false;
                 this.isLoading = false;
             }
@@ -229,7 +234,7 @@ export class SettingsComponent implements OnInit {
             },
             error => {
                 this.payPalUiComponent.callLoadingEvent(false);
-                this.payPalUiComponent.callStatusEvent('Could not load shipping countries: ' + error.statusText, 'danger');
+                this.payPalUiComponent.callStatusEvent(this.localization.translate('errorLoadShippingCountries') + ': ' + error.statusText, 'danger');
                 this.payPalUiComponent.isLoading = false;
                 this.isLoading = false;
             }
@@ -292,7 +297,7 @@ export class SettingsComponent implements OnInit {
             }
         }
 
-        this.setCurrentData(this.webstore, this.lang);
+        this.setCurrentData(this.webstore, this.selectLang);
     }
 
     private saveSettings():void
@@ -315,13 +320,13 @@ export class SettingsComponent implements OnInit {
 
         this.service.saveSettings(data).subscribe(
             response => {
-                this.payPalUiComponent.callStatusEvent('Settings saved successfully', 'success');
+                this.payPalUiComponent.callStatusEvent(this.localization.translate('successSaveSettings') , 'success');
                 this.payPalUiComponent.callLoadingEvent(false);
                 this.isLoading = false;
             },
 
             error => {
-                this.payPalUiComponent.callStatusEvent('Could not save settings: ' + error.statusText, 'danger');
+                this.payPalUiComponent.callStatusEvent(this.localization.translate('errorSaveSettings') + ': ' + error.statusText, 'danger');
                 this.payPalUiComponent.callLoadingEvent(false);
                 this.isLoading = false;
             }
@@ -370,12 +375,12 @@ export class SettingsComponent implements OnInit {
 
     private changeLanguage(event:TerraSelectBoxValueInterface)
     {
-        if(this.lang != event.value)
+        if(this.selectLang != event.value)
         {
             this.setLanguageData();
         }
 
-        this.lang = event.value;
+        this.selectLang = event.value;
         this.setCurrentData();
     }
 
@@ -412,7 +417,8 @@ export class SettingsComponent implements OnInit {
 
         if(this.settings.webstore["PID_" + webstore.toString()].language[language] === undefined)
         {
-            this.settings.webstore["PID_" + webstore].language[language] = {
+            this.settings.webstore["PID_" + webstore].language[language] =
+                {
                     name:       '',
                     logo:       '',
                     infoPage:   ''
@@ -440,14 +446,14 @@ export class SettingsComponent implements OnInit {
         /**
          * Check if object is correct
          */
-        this.checkLanguageExist(this.webstore, this.lang);
+        this.checkLanguageExist(this.webstore, this.selectLang);
 
         /**
          * Language settings
          */
-        this.settings.webstore["PID_" + this.webstore].language[this.lang].name = this.name;
-        this.settings.webstore["PID_" + this.webstore].language[this.lang].logo = this.logo;
-        this.settings.webstore["PID_" + this.webstore].language[this.lang].infoPage = this.infoPage;
+        this.settings.webstore["PID_" + this.webstore].language[this.selectLang].name = this.name;
+        this.settings.webstore["PID_" + this.webstore].language[this.selectLang].logo = this.logo;
+        this.settings.webstore["PID_" + this.webstore].language[this.selectLang].infoPage = this.infoPage;
     }
 
     private setMarkupData()
@@ -475,7 +481,7 @@ export class SettingsComponent implements OnInit {
         if(webstore && lang)
         {
             this.webstore = webstore;
-            this.lang = lang;
+            this.selectLang = lang;
         }
 
         var store = "PID_" + this.webstore;
@@ -501,11 +507,11 @@ export class SettingsComponent implements OnInit {
 
             this.shippingCountries = this.settings.webstore[store].shippingCountries;
 
-            if(this.lang in this.settings.webstore[store].language)
+            if(this.selectLang in this.settings.webstore[store].language)
             {
-                this.infoPage = this.settings.webstore[store].language[this.lang].infoPage;
-                this.name = this.settings.webstore[store].language[this.lang].name;
-                this.logo = this.settings.webstore[store].language[this.lang].logo;
+                this.infoPage = this.settings.webstore[store].language[this.selectLang].infoPage;
+                this.name = this.settings.webstore[store].language[this.selectLang].name;
+                this.logo = this.settings.webstore[store].language[this.selectLang].logo;
             }
             else
             {
