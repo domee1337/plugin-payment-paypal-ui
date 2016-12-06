@@ -61,5 +61,7 @@
 	"successCreateAccount" : "Konto wurde erfolgeich gespeichert",
 	"addAccountSuccessfully" : "Konto wurde erfolgeich hinzugefügt",
 	"successSaveAccount" : "Konto wurde erfolgeich gespeichert",
-	"successDeleteAccount" : "Konto wurde erfolgeich gelöscht"
+	"successDeleteAccount" : "Konto wurde erfolgeich gelöscht",
+
+	"selectAll" : "Alle auswählen"
 }
