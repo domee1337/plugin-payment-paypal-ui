@@ -62,5 +62,7 @@
 	"successCreateAccount" : "Account created.",
 	"addAccountSuccessfully" : "Account added.",
 	"successSaveAccount" : "Account saved.",
-	"successDeleteAccount" : "Account deleted."
+	"successDeleteAccount" : "Account deleted.",
+
+	"selectAll" : "Select All"
 }
