@@ -122,23 +122,28 @@ export class SettingsComponent extends Locale implements OnInit
         this.priorityValues = [
             {
                 value:      '1',
-                caption:    '1'
+                caption:    '',
+                icon:       'icon-rating_small_1'
             },
             {
                 value:      '2',
-                caption:    '2'
+                caption:    '',
+                icon:       'icon-rating_small_02'
             },
             {
                 value:      '3',
-                caption:    '3'
+                caption:    '',
+                icon:       'icon-rating_small_3'
             },
             {
                 value:      '4',
-                caption:    '4'
+                caption:    '',
+                icon:       'icon-rating_small_4'
             },
             {
                 value:      '5',
-                caption:    '5'
+                caption:    '',
+                icon:       'icon-rating_small_5'
             }
         ];
     }
@@ -152,8 +157,6 @@ export class SettingsComponent extends Locale implements OnInit
     ngOnInit()
     {
         this.loadWebstores();
-        this.loadShippingCountries();
-        this.loadSettings();
     }
 
     public loadWebstores()
@@ -175,6 +178,8 @@ export class SettingsComponent extends Locale implements OnInit
                 this.payPalUiComponent.callLoadingEvent(false);
                 this.payPalUiComponent.isLoading = false;
                 this.isLoading = false;
+
+                this.loadShippingCountries();
             },
 
             error => {
@@ -231,6 +236,8 @@ export class SettingsComponent extends Locale implements OnInit
                 this.payPalUiComponent.callLoadingEvent(false);
                 this.payPalUiComponent.isLoading = false;
                 this.isLoading = false;
+
+                this.loadSettings();
             },
             error => {
                 this.payPalUiComponent.callLoadingEvent(false);
@@ -506,7 +513,6 @@ export class SettingsComponent extends Locale implements OnInit
             };
 
             this.shippingCountries = this.settings.webstore[store].shippingCountries;
-
             if(this.selectLang in this.settings.webstore[store].language)
             {
                 this.infoPage = this.settings.webstore[store].language[this.selectLang].infoPage;
