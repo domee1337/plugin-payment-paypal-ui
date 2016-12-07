@@ -9,12 +9,14 @@ import {
     LocaleModule,
     LocalizationModule
 } from 'angular2localization';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
               imports:      [
                   CommonModule,
                   LocaleModule,
                   LocalizationModule,
+                  FormsModule,
                   TerraComponentsModule.forRoot()
               ],
               declarations: [AccountDetailsComponent]
