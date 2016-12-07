@@ -6,9 +6,11 @@ import {
 import { SettingsService } from "./service/settings.service";
 import { PayPalUiComponent } from "../paypal-ui.component";
 import set = Reflect.set;
-import { Locale } from 'angular2localization';
-import { LocaleService } from "angular2localization/angular2localization";
-import { LocalizationService } from "angular2localization/angular2localization";
+import {
+    LocaleService,
+    LocalizationService,
+    Locale
+} from 'angular2localization';
 
 @Component({
     selector: 'settings',

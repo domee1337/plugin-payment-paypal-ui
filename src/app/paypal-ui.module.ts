@@ -39,7 +39,7 @@ import { LocalizationService } from "angular2localization/angular2localization";
         PermissionService,
         AccountService,
         LocaleService,
-        LocalizationService,
+        LocalizationService
     ],
 
     bootstrap: [
