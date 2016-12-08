@@ -14,6 +14,7 @@ export class PermissionService extends TerraBaseService
 {
     private _modules:Array<TerraSplitViewInterface> = [];
     private _currentAccount:any;
+    private _currentAccountId:number;
     private _accountList:Array<TerraLeafInterface> = [];
 
     constructor(loadingBarService:TerraLoadingBarService, http:Http)
@@ -48,6 +49,16 @@ export class PermissionService extends TerraBaseService
     public set currentAccount(account:any)
     {
         this._currentAccount = account;
+    }
+
+    public get currentAccountId():number
+    {
+        return this._currentAccountId;
+    }
+
+    public set currentAccountId(accountId:number)
+    {
+        this._currentAccountId = accountId;
     }
 
     public get accountList():Array<TerraLeafInterface>
@@ -92,7 +103,7 @@ export class PermissionService extends TerraBaseService
         );
     }
 
-    public showAccountDetails(account:any):void
+    public showAccountDetails(accountId:number, account:any):void
     {
         let details:TerraSplitViewInterface;
 
@@ -106,5 +117,6 @@ export class PermissionService extends TerraBaseService
 
         this.addModule(details);
         this.currentAccount = account;
+        this.currentAccountId = accountId;
     }
 }

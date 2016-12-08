@@ -35,6 +35,8 @@ export class AccountDetailsComponent extends Locale implements OnInit
     private basket;
     private expressButton;
 
+    private myValue:number;
+
     constructor(    private accountService:AccountService,
                     @Inject(forwardRef(() => PermissionService)) permissionService:PermissionService,
                     @Inject(forwardRef(() => PayPalUiComponent)) private payPalUiComponent:PayPalUiComponent,
@@ -42,9 +44,6 @@ export class AccountDetailsComponent extends Locale implements OnInit
                     localization:LocalizationService)
     {
         super(locale, localization);
-
-        this.service = accountService;
-        this._permissionService = permissionService;
 
         this.paymentActionValues = [
             {
@@ -63,29 +62,27 @@ export class AccountDetailsComponent extends Locale implements OnInit
 
         this.environments = [
             {
-                caption:    this.localization.translate('sandbox'),
-                value:      1
-            },
-            {
                 caption:    this.localization.translate('live'),
                 value:      0
+            },
+            {
+                caption:    this.localization.translate('sandbox'),
+                value:      1
             }
         ];
+
+        this.service = accountService;
+        this._permissionService = permissionService;
     }
 
     /*
      * belong to OnInit Lifecycle hook
      * get called right after the directive's data-bound properties have been checked for the
      * first time, and before any of its children have been checked. It is invoked only once when the
-     * directive is instantiated.
+     * directive is instantiated
      */
     ngOnInit()
     {
-        var account = this._permissionService.currentAccount;
-        this.email = account.email;
-        this.clientId = account.clientId;
-        this.clientSecret = account.clientSecret;
-
         this.isLoading = false;
     }
 
@@ -94,20 +91,9 @@ export class AccountDetailsComponent extends Locale implements OnInit
         this.isLoading = true;
         this.payPalUiComponent.callLoadingEvent(true);
 
-        let account = {
-            email:          this.email,
-            clientId:       this.clientId,
-            clientSecret:   this.clientSecret,
-            logo:           this.logo,
-            basket:         this.basket,
-            environment:    this.environment,
-            paymentAction:  this.paymentAction,
-            expressButton:  this.expressButton
-        };
-
         let data = {
-            accountId: {
-                [this.email] : account
+            account: {
+                [this._permissionService.currentAccountId] : this._permissionService.currentAccount
             }
         };
 
@@ -131,19 +117,19 @@ export class AccountDetailsComponent extends Locale implements OnInit
         this.isLoading = true;
         this.payPalUiComponent.callLoadingEvent(true);
 
-        let data = { accountId: this.email};
+        let data = { accountId: this._permissionService.currentAccountId };
 
         this.service.deleteAccount(data).subscribe(
             response => {
 
                 this._permissionService.accountList = [];
-                for (let account in response)
+                for (let accountId in response)
                 {
-                    let acc = response[account];
+                    let account = response[accountId];
                     this._permissionService.addAccount({
-                        caption:     account,
+                        caption:     account.email,
                         icon:        'icon-user_my_account',
-                        clickFunction: () => { this._permissionService.showAccountDetails(acc); },
+                        clickFunction: () => { this._permissionService.showAccountDetails(accountId ,account); },
                     });
                 }
 

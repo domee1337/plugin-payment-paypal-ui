@@ -23,21 +23,21 @@
             <div class="row" style="margin-top: 10px;">
                 <div class="col-lg-8">
                     <terra-text-input
-                        [(ngModel)]="email"
+                        [(ngModel)]="_permissionService.currentAccount.email"
                         [inputDisabled]="true"
                         [inputIsRequired]="true"
                         inputName="{{ 'account' | translate:lang }}">
                     </terra-text-input>
                     
                     <terra-text-input
-                        inputValue="{{ clientId }}"
+                        [(ngModel)]="_permissionService.currentAccount.clientId"
                         [inputDisabled]="true"
                         [inputIsRequired]="true"
                         inputName="{{ 'clientId' | translate:lang }}">
                     </terra-text-input>
                     
                     <terra-text-input
-                        inputValue="{{ clientSecret }}"
+                        [(ngModel)]="_permissionService.currentAccount.clientSecret"
                         [inputDisabled]="true"
                         [inputIsRequired]="true"
                         inputName="{{ 'clientSecret' | translate:lang }}">
@@ -47,22 +47,24 @@
                                       [inputListBoxValues]="environments"
                                       inputTooltipText="{{ 'environment' | translate:lang }}"
                                       inputTooltipPlacement="top"
-                                      [(inputSelectedValue)]="environment">
+                                      [(inputSelectedValue)]="_permissionService.currentAccount.environment">
                     </terra-select-box>
-                    
+
                     <terra-text-input
-                        inputName="{{ 'logoUrl' | translate:lang }}">
+                        inputName="{{ 'logoUrl' | translate:lang }}"
+                        [(ngModel)]="_permissionService.currentAccount.logo">
                     </terra-text-input>
                     
                     <terra-text-input
-                        inputName="{{ 'basketColor' | translate:lang }}">
+                        inputName="{{ 'basketColor' | translate:lang }}"
+                        [(ngModel)]="_permissionService.currentAccount.basket">
                     </terra-text-input>
                     
                     <terra-select-box inputName="{{ 'paymentAction' | translate:lang }}"
                                       [inputListBoxValues]="paymentActionValues"
                                       inputTooltipText="{{ 'paymentEntry' | translate:lang }}"
                                       inputTooltipPlacement="top"
-                                      [(inputSelectedValue)]="paymentAction">
+                                      [(inputSelectedValue)]="_permissionService.currentAccount.paymentAction">
                     </terra-select-box>
                 </div>
                 <div class="col-lg-4">

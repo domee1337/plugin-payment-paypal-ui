@@ -45,13 +45,13 @@ export class AccountListComponent extends Locale implements OnInit
 
         this.accountService.getAccounts().subscribe(
             response => {
-                for (let account in response)
+                for (let accountId in response)
                 {
-                    let acc = response[account];
+                    let account = response[accountId];
                     this._permissionService.addAccount({
-                        caption:     account,
+                        caption:     account.email,
                         icon:        'icon-user_my_account',
-                        clickFunction: () => { this._permissionService.showAccountDetails(acc); },
+                        clickFunction: () => { this._permissionService.showAccountDetails(accountId, account); },
                     });
                 }
 

@@ -45,7 +45,7 @@ export class SettingsService extends TerraBaseService
 
         url = this.url + 'rest/webstores/';
 
-        this.headers.set('Authorization', 'Bearer ODfSMa2BAGfj0H9tfvScsEos0clIUuTvQysmFRFy');
+        this.headers.set('Authorization', 'Bearer nnqSYt9AM29Uv49seRUK8zBc5hi3Y5kuFUghafWO');
 
         return this.mapRequest(
             this.http.get(url, {headers: this.headers, body: ''})
@@ -61,7 +61,7 @@ export class SettingsService extends TerraBaseService
 
         url = this.url + 'rest/orders/shipping/countries/';
 
-        this.headers.set('Authorization', 'Bearer ODfSMa2BAGfj0H9tfvScsEos0clIUuTvQysmFRFy');
+        this.headers.set('Authorization', 'Bearer nnqSYt9AM29Uv49seRUK8zBc5hi3Y5kuFUghafWO');
 
         return this.mapRequest(
             this.http.get(url, {headers: this.headers, body: ''})
