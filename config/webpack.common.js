@@ -20,7 +20,7 @@ module.exports = function (options) {
     isProd = options.env === 'production';
     return {
         entry: {
-            'bootstrap': 'bootstrap-loader',
+            'bootstrap': 'bootstrap-loader/extractStyles',
             'polyfills': './src/polyfills.ts',
             'vendor': './src/vendor.ts',
             'app': './src/main.ts'
@@ -46,13 +46,28 @@ module.exports = function (options) {
                 },
                 {
                     test: /\.scss$/,
-                    use: [
-                        'style-loader',
-                        'css-loader',
-                        'postcss-loader',
-                        'sass-loader',
-                        'sass-resources-loader'
-                    ]
+                    loader: ExtractTextPlugin.extract({
+                        fallbackLoader: 'style-loader',
+                        loader: [
+                            {
+                                loader: 'css-loader',
+                                query: {
+                                    modules: false,
+                                    sourceMap: false,
+                                    localIdentName: '[hash:base64:5]',
+                                    minimize: true
+                                }
+                            },
+                            'postcss-loader',
+                            {
+                                loader: 'sass-loader',
+                                query: {
+                                    sourceMap: false
+                                }
+                            },
+                            'sass-resources-loader'
+                        ]
+                    })
                 },
                 {
                     test: /\.json$/,
@@ -127,6 +142,8 @@ module.exports = function (options) {
                 //---------------------------------------------------
             }),
 
+            new ExtractTextPlugin("[name].css"),
+
             new LoaderOptionsPlugin({
                 debug: true,
                 options: {
@@ -140,7 +157,7 @@ module.exports = function (options) {
                         formattersDirectory: "./node_modules/tslint-loader/formatters/"
                     },
                     sassResources: [
-                        helpers.root('node_modules/@plentymarkets/terra-components/app/assets/styles/_variables.scss').toString()
+                        helpers.root('./node_modules/@plentymarkets/terra-components/app/assets/styles/_variables.scss').toString()
                     ]
                 }
             })
