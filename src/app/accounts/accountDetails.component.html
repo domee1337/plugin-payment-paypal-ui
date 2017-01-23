@@ -24,21 +24,21 @@
                 <div class="col-lg-8">
                     <terra-text-input
                         [(ngModel)]="_permissionService.currentAccount.email"
-                        [inputDisabled]="true"
+                        [inputIsDisabled]="true"
                         [inputIsRequired]="true"
                         inputName="{{ 'account' | translate:lang }}">
                     </terra-text-input>
                     
                     <terra-text-input
                         [(ngModel)]="_permissionService.currentAccount.clientId"
-                        [inputDisabled]="true"
+                        [inputIsDisabled]="true"
                         [inputIsRequired]="true"
                         inputName="{{ 'clientId' | translate:lang }}">
                     </terra-text-input>
                     
                     <terra-text-input
                         [(ngModel)]="_permissionService.currentAccount.clientSecret"
-                        [inputDisabled]="true"
+                        [inputIsDisabled]="true"
                         [inputIsRequired]="true"
                         inputName="{{ 'clientSecret' | translate:lang }}">
                     </terra-text-input>

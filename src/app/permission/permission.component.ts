@@ -6,7 +6,11 @@ import {
 import { PermissionService } from "./service/permission.service"
 import { AccountListModule } from '../accounts/accountList.module';
 import { PayPalUiComponent } from "../paypal-ui.component";
-import { TerraOverlayComponent, TerraAlertComponent } from "@plentymarkets/terra-components";
+import {
+    TerraOverlayComponent,
+    TerraAlertComponent,
+    TerraOverlayButtonInterface
+} from "@plentymarkets/terra-components";
 import { Locale } from "angular2localization";
 import { LocaleService } from "angular2localization/angular2localization";
 import { LocalizationService } from "angular2localization/angular2localization";
@@ -27,7 +31,10 @@ export class PermissionComponent extends Locale implements OnInit
     private clientSecret;
 
     private alert:TerraAlertComponent = TerraAlertComponent.getInstance();
-
+    
+    private _addAccountButton:TerraOverlayButtonInterface;
+    private _closeButton:TerraOverlayButtonInterface;
+    
     @ViewChild('viewOverlayPayPalAddAccount') public viewOverlayPayPalAddAccount:TerraOverlayComponent;
 
     constructor(    permissionService:PermissionService,
@@ -46,6 +53,21 @@ export class PermissionComponent extends Locale implements OnInit
 
         this.payPalUiComponent.callLoadingEvent(false);
         this.payPalUiComponent.isLoading = false;
+    
+        this._addAccountButton = {
+            icon:          'icon-confirm',
+            caption:       'Add',
+            isDisabled:    false,
+            clickFunction: () => this.addPayPalAccount(this.viewOverlayPayPalAddAccount)
+        };
+    
+        this._closeButton = {
+            icon:          'icon-confirm',
+            caption:       'Close',
+            isDisabled:    false,
+            clickFunction: () => this.closeOverlay(this.viewOverlayPayPalAddAccount)
+        };
+        
     }
 
     public openOverlayPayPalAddAccount():void

@@ -17,13 +17,10 @@
 
         <terra-overlay
                 #viewOverlayPayPalAddAccount
-                inputAddButtonTooltip="{{ 'addAccount' | translate:lang }}"
-                inputCancelButtonTooltip="{{ 'close' | translate:lang }}"
+                inputPrimaryButtonInterface="{{ 'addAccount' | translate:lang }}"
+                inputSecondaryButtonInterface="{{ 'close' | translate:lang }}"
                 inputOverlayTitle="{{ 'addNewPayPalAccount' | translate:lang }}"
-                [inputHasPrimaryButton]="true"
-                [inputHasSecondaryButton]="true"
-                (outputPrimaryButtonClicked)="addPayPalAccount($event)"
-                (outputSecondaryButtonClicked)="closeOverlay($event)">
+        >
 
             <div class="row">
                 <div class="col-md-12">
