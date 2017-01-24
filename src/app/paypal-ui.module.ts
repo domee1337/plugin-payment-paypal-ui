@@ -15,6 +15,8 @@ import { LocaleModule } from "angular2localization/angular2localization";
 import { LocalizationModule } from "angular2localization/angular2localization";
 import { LocaleService } from "angular2localization/angular2localization";
 import { LocalizationService } from "angular2localization/angular2localization";
+import { WebShopSelectorModule } from './settings/views/test/webshop-selector.module';
+import { SettingViewModule } from './settings/views/setting-view/setting-view.module';
 
 @NgModule({
     imports: [
@@ -23,6 +25,9 @@ import { LocalizationService } from "angular2localization/angular2localization";
         FormsModule,
         LocaleModule,
         LocalizationModule,
+        
+        WebShopSelectorModule.forRoot(),
+        //SettingViewModule.forRoot(),
 
         TerraComponentsModule.forRoot()
     ],
