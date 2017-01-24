@@ -27,14 +27,6 @@ export class SettingsComponent implements OnInit
     
     ngOnInit()
     {
-        //this._modules.push({
-        //                       module:            SettingViewModule.forRoot(),
-        //                       defaultWidth:      'auto',
-        //                       hidden:            false,
-        //                       name:              'Filter',
-        //                       mainComponentName: 'SettingViewComponent'
-        //                   });
-        
         this._modules.push({
                                module:            WebShopSelectorModule.forRoot(),
                                defaultWidth:      'auto',
@@ -43,7 +35,13 @@ export class SettingsComponent implements OnInit
                                mainComponentName: 'WebShopSelectorComponent'
                            });
         
-        
+        this._modules.push({
+                               module:            SettingViewModule.forRoot(),
+                               defaultWidth:      'auto',
+                               hidden:            false,
+                               name:              'Setting',
+                               mainComponentName: 'SettingViewComponent'
+                           });
     }
     
     public get modules():Array<TerraSplitViewInterface>
