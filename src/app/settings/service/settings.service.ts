@@ -20,7 +20,7 @@ export class SettingsService extends TerraBaseService
         
         let url:string;
         
-        url = this.url + 'payPal/settings/';
+        url = this.url + 'payment/payPal/settings/';
         
         return this.mapRequest(
             this.http.get(url, {
@@ -36,7 +36,7 @@ export class SettingsService extends TerraBaseService
         
         let url:string;
         
-        url = this.url + 'payPal/settings/';
+        url = this.url + 'payment/payPal/settings/';
         
         return this.mapRequest(
             this.http.post(url, data, {headers: this.headers})
@@ -51,7 +51,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'rest/webstores/';
         
-        this.headers.set('Authorization', 'Bearer a0030wZb6vvBGcoIKSXTZHWwTGh2m2bzRUgVYMW3');
+        this.headers.set('Authorization', 'Bearer NhwvbgZgcBJXlUSf4Sk33M7mInWbabfEIHbp73kA');
         
         return this.mapRequest(
             this.http.get(url, {
@@ -70,8 +70,26 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'rest/orders/shipping/countries/';
         
-        this.headers.set('Authorization', 'Bearer a0030wZb6vvBGcoIKSXTZHWwTGh2m2bzRUgVYMW3');
+        this.headers.set('Authorization', 'Bearer NhwvbgZgcBJXlUSf4Sk33M7mInWbabfEIHbp73kA');
         
+        return this.mapRequest(
+            this.http.get(url, {
+                headers: this.headers,
+                body:    ''
+            })
+        );
+    }
+    
+    public getAccounts():Observable<any>
+    {
+        this.setAuthorization();
+    
+        let url:string;
+    
+        url = this.url + 'payment/payPal/accounts/';
+    
+        this.headers.set('Authorization', 'Bearer NhwvbgZgcBJXlUSf4Sk33M7mInWbabfEIHbp73kA');
+    
         return this.mapRequest(
             this.http.get(url, {
                 headers: this.headers,

@@ -82,7 +82,7 @@ export class PermissionService extends TerraBaseService
 
         let url:string;
 
-        url = this.url + 'payPal/accounts/';
+        url = this.url + 'payment/payPal/accounts/';
 
         return this.mapRequest
         (
@@ -96,7 +96,7 @@ export class PermissionService extends TerraBaseService
 
         let url:string;
 
-        url = this.url + 'payPal/account/';
+        url = this.url + 'payment/payPal/account/';
 
         return this.mapRequest(
             this.http.post(url, data, {headers: this.headers})

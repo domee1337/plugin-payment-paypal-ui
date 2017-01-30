@@ -1,5 +1,6 @@
 {
 	"save" : "Save",
+	"reset": "Reset",
 	"delete" : "Delete",
 	"webstores" : "Clients (stores)",
 	"language" : "Language",
@@ -12,6 +13,7 @@
 
 	"account" : "Account",
 	"accounts" : "Accounts",
+	"activeAccount" : "Active account",
 	"addNewPayPalAccount" : "Add a new PayPal account",
 	"addAccount" : "Add account",
 	"close" : "Close",
@@ -64,5 +66,7 @@
 	"successSaveAccount" : "Account saved.",
 	"successDeleteAccount" : "Account deleted.",
 
-	"selectAll" : "Select All"
+	"selectAll" : "Select All",
+
+	"languageSettings" : "Language Setting"
 }

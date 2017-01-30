@@ -29,6 +29,7 @@ export class SettingViewComponent extends Locale implements OnInit
     private service:SettingsService;
     private settings;
     
+    private activeAccount;
     private selectLang = 'de';
     private webstore = 1000;
     private name;
@@ -47,6 +48,7 @@ export class SettingViewComponent extends Locale implements OnInit
     private shippingCountries:Array<any> = [];
     private priorityValues:Array<TerraSelectBoxValueInterface>;
     private webstoreValues:Array<TerraSelectBoxValueInterface> = [];
+    private activeAccountValues:Array<TerraSelectBoxValueInterface> = [];
     
     constructor(private settingsService:SettingsService,
                 @Inject(forwardRef(() => PayPalUiComponent)) private payPalUiComponent:PayPalUiComponent,
@@ -153,6 +155,13 @@ export class SettingViewComponent extends Locale implements OnInit
                 icon:    'icon-rating_small_5'
             }
         ];
+        
+        this.activeAccountValues = [
+            {
+                value:   '',
+                caption: '---'
+            }
+        ];
     }
     
     /*
@@ -163,7 +172,44 @@ export class SettingViewComponent extends Locale implements OnInit
      */
     ngOnInit()
     {
+        this.loadAccounts();
         this.loadWebstores();
+    }
+    
+    public loadAccounts()
+    {
+        this.payPalUiComponent.callLoadingEvent(true);
+        
+        this.service
+            .getAccounts()
+            .subscribe(response =>
+                       {
+                           let items = [];
+            
+                           response.forEach((acc) =>
+                                            {
+                                                items.push({
+                                                               value:   acc.clientId,
+                                                               caption: acc.email,
+                                                               active:  true
+                                                           });
+                                            });
+            
+                           this.activeAccountValues = items;
+            
+                           this.payPalUiComponent.callLoadingEvent(false);
+                           this.payPalUiComponent.isLoading = false;
+                           this.isLoading = false;
+                       },
+        
+                       error =>
+                       {
+                           this.payPalUiComponent.callLoadingEvent(false);
+                           this.payPalUiComponent.callStatusEvent(this.localization.translate('errorLoadAccounts') + ': ' + error.statusText, 'danger');
+                           this.payPalUiComponent.isLoading = false;
+                           this.isLoading = false;
+                       });
+        
     }
     
     public loadWebstores()
@@ -355,6 +401,11 @@ export class SettingViewComponent extends Locale implements OnInit
                 this.isLoading = false;
             }
         );
+    }
+    
+    private resetSettings():void
+    {
+        
     }
     
     private getSelectedShippingCountries():Array<any>

@@ -1,5 +1,6 @@
 {
 	"save" : "Speichern",
+	"reset": "Reset",
 	"delete" : "Löschen",
 	"webstores" : "Mandanten (Shops)",
 	"language" : "Sprache",
@@ -12,6 +13,7 @@
 
 	"account" : "Konto",
  	"accounts" : "Konten",
+	"activeAccount" : "Aktives Konto",
 	"addNewPayPalAccount" : "Ein neues PayPal-Konto hinzufügen",
 	"addAccount" : "Konto hinzufügen",
 	"close" : "Schließen",
@@ -64,5 +66,7 @@
 	"successSaveAccount" : "Konto gespeichert.",
 	"successDeleteAccount" : "Konto gelöscht.",
 
-	"selectAll" : "Alle auswählen"
+	"selectAll" : "Alle auswählen",
+
+	"languageSettings" : "Spracheinstellungen"
 }

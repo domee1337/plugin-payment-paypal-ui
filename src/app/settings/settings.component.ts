@@ -6,7 +6,7 @@ import {
 } from '@angular/core';
 import { TerraSplitViewInterface } from '@plentymarkets/terra-components/index';
 import { SettingViewModule } from './views/setting-view/setting-view.module';
-import { WebShopSelectorModule } from './views/test/webshop-selector.module';
+import { WebShopSelectorModule } from './views/webshop-selector-view/webshop-selector-view.module';
 import { PayPalUiComponent } from '../paypal-ui.component';
 
 @Component({
@@ -29,7 +29,7 @@ export class SettingsComponent implements OnInit
     {
         this._modules.push({
                                module:            WebShopSelectorModule.forRoot(),
-                               defaultWidth:      'auto',
+                               defaultWidth:      '15%',
                                hidden:            false,
                                name:              'Filter',
                                mainComponentName: 'WebShopSelectorComponent'
@@ -37,7 +37,7 @@ export class SettingsComponent implements OnInit
         
         this._modules.push({
                                module:            SettingViewModule.forRoot(),
-                               defaultWidth:      'auto',
+                               defaultWidth:      '85%',
                                hidden:            false,
                                name:              'Setting',
                                mainComponentName: 'SettingViewComponent'

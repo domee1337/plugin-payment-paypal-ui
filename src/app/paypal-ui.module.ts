@@ -15,7 +15,7 @@ import { LocaleModule } from "angular2localization/angular2localization";
 import { LocalizationModule } from "angular2localization/angular2localization";
 import { LocaleService } from "angular2localization/angular2localization";
 import { LocalizationService } from "angular2localization/angular2localization";
-import { WebShopSelectorModule } from './settings/views/test/webshop-selector.module';
+import { WebShopSelectorModule } from './settings/views/webshop-selector-view/webshop-selector-view.module';
 import { SettingViewModule } from './settings/views/setting-view/setting-view.module';
 
 @NgModule({

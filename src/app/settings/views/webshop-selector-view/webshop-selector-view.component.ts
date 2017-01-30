@@ -5,8 +5,8 @@ import {
 
 @Component({
                selector: 'setting-view',
-               template: require('./webshop-selector.component.html'),
-               styles:   [require('./webshop-selector.component.scss').toString()]
+               template: require('./webshop-selector-view.component.html'),
+               styles:   [require('./webshop-selector-view.component.scss').toString()]
            })
 
 export class WebShopSelectorComponent implements OnInit

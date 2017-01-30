@@ -14,14 +14,12 @@
                 </div>
             </div>
         </div>
-
+        
         <terra-overlay
-                #viewOverlayPayPalAddAccount
-                inputPrimaryButtonInterface="{{ 'addAccount' | translate:lang }}"
-                inputSecondaryButtonInterface="{{ 'close' | translate:lang }}"
-                inputOverlayTitle="{{ 'addNewPayPalAccount' | translate:lang }}"
-        >
-
+            #viewOverlayPayPalAddAccount
+            [inputPrimaryButtonInterface]="_addAccountButton"
+            [inputSecondaryButtonInterface]="_closeButton"
+            inputOverlayTitle="{{ 'addNewPayPalAccount' | translate:lang }}">
             <div class="row">
                 <div class="col-md-12">
                     <terra-text-input [(ngModel)]="email" inputName="{{ 'email' | translate:lang }}"></terra-text-input>

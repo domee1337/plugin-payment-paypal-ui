@@ -17,7 +17,7 @@ export class AccountService extends TerraBaseService
 
         let url:string;
 
-        url = this.url + 'payPal/accounts/';
+        url = this.url + 'payment/payPal/accounts/';
 
         return this.mapRequest
         (
@@ -31,7 +31,7 @@ export class AccountService extends TerraBaseService
 
         let url:string;
 
-        url = this.url + 'payPal/account';
+        url = this.url + 'payment/payPal/account';
 
         return this.mapRequest(
             this.http.delete(url, {headers: this.headers, body: data})
@@ -44,7 +44,7 @@ export class AccountService extends TerraBaseService
 
         let url:string;
 
-        url = this.url + 'payPal/account';
+        url = this.url + 'payment/payPal/account';
 
         return this.mapRequest(
             this.http.put(url, data, {headers: this.headers})
