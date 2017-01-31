@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TerraComponentsModule } from '@plentymarkets/terra-components/app/terra-components.module';
-import { WebShopSelectorComponent } from './webshop-selector-view.component';
+import { WebShopSelectorViewComponent } from './webshop-selector-view.component';
 
 @NgModule({
               imports:      [
@@ -9,10 +9,10 @@ import { WebShopSelectorComponent } from './webshop-selector-view.component';
                   TerraComponentsModule.forRoot()
               ],
               declarations: [
-                  WebShopSelectorComponent
+                  WebShopSelectorViewComponent
               ],
               exports:      [
-                  WebShopSelectorComponent
+                  WebShopSelectorViewComponent
               ]
           })
 export class WebShopSelectorModule

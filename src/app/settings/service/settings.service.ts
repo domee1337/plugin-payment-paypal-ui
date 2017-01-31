@@ -51,7 +51,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'rest/webstores/';
         
-        this.headers.set('Authorization', 'Bearer NhwvbgZgcBJXlUSf4Sk33M7mInWbabfEIHbp73kA');
+        this.headers.set('Authorization', 'Bearer NuQ33zCo8Mp3jU7Ws2g8asJMv9YWnX28JSCMZJhC');
         
         return this.mapRequest(
             this.http.get(url, {
@@ -70,7 +70,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'rest/orders/shipping/countries/';
         
-        this.headers.set('Authorization', 'Bearer NhwvbgZgcBJXlUSf4Sk33M7mInWbabfEIHbp73kA');
+        this.headers.set('Authorization', 'Bearer NuQ33zCo8Mp3jU7Ws2g8asJMv9YWnX28JSCMZJhC');
         
         return this.mapRequest(
             this.http.get(url, {
@@ -83,13 +83,13 @@ export class SettingsService extends TerraBaseService
     public getAccounts():Observable<any>
     {
         this.setAuthorization();
-    
+        
         let url:string;
-    
+        
         url = this.url + 'payment/payPal/accounts/';
-    
-        this.headers.set('Authorization', 'Bearer NhwvbgZgcBJXlUSf4Sk33M7mInWbabfEIHbp73kA');
-    
+        
+        this.headers.set('Authorization', 'Bearer NuQ33zCo8Mp3jU7Ws2g8asJMv9YWnX28JSCMZJhC');
+        
         return this.mapRequest(
             this.http.get(url, {
                 headers: this.headers,

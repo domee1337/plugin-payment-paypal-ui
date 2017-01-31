@@ -20,7 +20,7 @@ module.exports = function (options) {
     isProd = options.env === 'production';
     return {
         entry: {
-            'bootstrap': 'bootstrap-loader/extractStyles',
+            'bootstrap': 'bootstrap-loader',
             'polyfills': './src/polyfills.ts',
             'vendor': './src/vendor.ts',
             'app': './src/main.ts'

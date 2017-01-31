@@ -1,5 +1,5 @@
-<div style="margin: 30px;">
-    <div class="row">
+<div style="margin: 10px;">
+    <div class="row-container">
         <div class="btnContainer">
             <terra-button
                 [inputIsDisabled]="isLoading"
@@ -18,7 +18,7 @@
         </div>
     </div>
     
-    <div class="row">
+    <div class="row-container">
         <div style="width: 100%;">
             <terra-select-box inputName="{{ 'activeAccount' | translate:lang }}"
                               [inputListBoxValues]="activeAccountValues"
@@ -28,7 +28,7 @@
             </terra-select-box>
         </div>
     </div>
-    <div class="row">
+    <div class="row-container">
         <div style="width: 100%;">
             <terra-select-box inputName="{{ 'priority' | translate:lang }}"
                               [inputListBoxValues]="priorityValues"
@@ -39,33 +39,40 @@
         </div>
     </div>
     
-    <div class="row grayBackground" style="padding-top: 10px;">
-        <div class="col-md-6">
-            <h4>{{ 'languageSettings' | translate:lang}}</h4>
-        </div>
-        <div class="col-md-4">
-            <terra-select-box inputName="{{ 'language' | translate:lang }}"
-                              [inputListBoxValues]="languageValues"
-                              inputTooltipText="{{ 'language' | translate:lang }}"
-                              inputTooltipPlacement="bottom"
-                              (outputValueChanged)="changeLanguage($event)"
-                              [(inputSelectedValue)]="selectLang">
-            </terra-select-box>
-        </div>
-    </div>
     
     <div>
-        <terra-portlet>
-            <div class="row" style="margin-top: 10px;">
-                <div style="width: 50%; padding-right: 10px;">
-                    <terra-text-input [(ngModel)]="name" inputName="{{ 'displayName' | translate:lang }}"></terra-text-input>
-                </div>
+        <terra-portlet inputPortletHeader="{{'languageSettings' | translate:lang}}">
+            <div class="row-container" style="margin-top: 10px;">
                 <div style="width: 50%; padding-left: 10px;">
+                    <terra-select-box inputName="{{ 'language' | translate:lang }}"
+                                      [inputListBoxValues]="languageValues"
+                                      inputTooltipText="{{ 'language' | translate:lang }}"
+                                      inputTooltipPlacement="bottom"
+                                      (outputValueChanged)="changeLanguage($event)"
+                                      [(inputSelectedValue)]="selectLang">
+                    </terra-select-box>
+                </div>
+                <div style="width: 50%; padding: 0px 10px;">
                     <terra-select-box inputName="{{ 'infoPage' | translate:lang }}"
                                       [inputListBoxValues]="infoPageValues"
                                       inputTooltipText="{{ 'infoPage' | translate:lang }}"
                                       inputTooltipPlacement="top"
                                       [(inputSelectedValue)]="infoPage">
+                    </terra-select-box>
+                </div>
+            
+            </div>
+            
+            <div class="row-container">
+                <div style="width: 50%; padding-left: 10px;">
+                    <terra-text-input [(ngModel)]="name" inputName="{{ 'displayName' | translate:lang }}"></terra-text-input>
+                </div>
+                <div style="width: 50%; padding: 0px 10px;">
+                    <terra-select-box inputName="{{ 'logo' | translate:lang }}"
+                                      [inputListBoxValues]="logoValues"
+                                      inputTooltipText="{{ 'logo' | translate:lang }}"
+                                      inputTooltipPlacement="top"
+                                      [(inputSelectedValue)]="logo">
                     </terra-select-box>
                 </div>
             </div>
@@ -75,32 +82,7 @@
     </div>
     
     
-    <div class="row" style="margin-top: 10px;">
-        <div style="width: 50%; padding-right: 10px;">
-            <terra-text-input [(ngModel)]="name" inputName="{{ 'displayName' | translate:lang }}"></terra-text-input>
-        </div>
-        <div style="width: 50%; padding-left: 10px;">
-            <terra-select-box inputName="{{ 'infoPage' | translate:lang }}"
-                              [inputListBoxValues]="infoPageValues"
-                              inputTooltipText="{{ 'infoPage' | translate:lang }}"
-                              inputTooltipPlacement="top"
-                              [(inputSelectedValue)]="infoPage">
-            </terra-select-box>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div style="width: 50%; padding-right: 10px;">
-            <terra-select-box inputName="{{ 'logo' | translate:lang }}"
-                              [inputListBoxValues]="logoValues"
-                              inputTooltipText="{{ 'logo' | translate:lang }}"
-                              inputTooltipPlacement="top"
-                              [(inputSelectedValue)]="logo">
-            </terra-select-box>
-        </div>
-    </div>
-    
-    <div class="row">
+    <div class="row-container">
         <div style="width: 50%; padding-right: 10px;">
             <terra-multi-select-box
                 [inputValueList]="shippingCountryValues"

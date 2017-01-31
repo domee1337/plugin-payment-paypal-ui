@@ -21,7 +21,7 @@ import { SettingsService } from '../../service/settings.service';
 @Component({
                selector: 'setting-view',
                template: require('./setting-view.component.html'),
-               styles:   [require('./setting-view.component.scss').toString()]
+               styles:   [require('./setting-view.component.scss')]
            })
 
 export class SettingViewComponent extends Locale implements OnInit

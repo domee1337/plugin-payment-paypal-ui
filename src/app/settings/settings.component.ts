@@ -12,7 +12,7 @@ import { PayPalUiComponent } from '../paypal-ui.component';
 @Component({
                selector: 'settings',
                template: require('./settings.component.html'),
-               styles:   [require('./settings.component.scss').toString()]
+               styles:   [require('./settings.component.scss')]
            })
 
 export class SettingsComponent implements OnInit
@@ -32,12 +32,12 @@ export class SettingsComponent implements OnInit
                                defaultWidth:      '15%',
                                hidden:            false,
                                name:              'Filter',
-                               mainComponentName: 'WebShopSelectorComponent'
+                               mainComponentName: 'WebShopSelectorViewComponent'
                            });
         
         this._modules.push({
                                module:            SettingViewModule.forRoot(),
-                               defaultWidth:      '85%',
+                               defaultWidth:      '84%',
                                hidden:            false,
                                name:              'Setting',
                                mainComponentName: 'SettingViewComponent'
