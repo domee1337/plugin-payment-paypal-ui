@@ -14,13 +14,15 @@ export class SettingsService extends TerraBaseService
         super(loadingBarService, http, 'http://master.plentymarkets.com/');
     }
     
-    public getSettings():Observable<any>
+    // TODO set parameter for paypal plus installment
+    public getSettings(payPalMode:string):Observable<any>
     {
+        
         this.setAuthorization();
         
         let url:string;
         
-        url = this.url + 'payment/payPal/settings/';
+        url = this.url + 'payment/payPal/settings/' + payPalMode;
         
         return this.mapRequest(
             this.http.get(url, {
@@ -51,7 +53,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'rest/webstores/';
         
-        this.headers.set('Authorization', 'Bearer NuQ33zCo8Mp3jU7Ws2g8asJMv9YWnX28JSCMZJhC');
+        this.headers.set('Authorization', 'Bearer 4EdxvuurOx3qblzOB3H9G2Zry7yifKmpHqkN51m6');
         
         return this.mapRequest(
             this.http.get(url, {
@@ -70,7 +72,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'rest/orders/shipping/countries/';
         
-        this.headers.set('Authorization', 'Bearer NuQ33zCo8Mp3jU7Ws2g8asJMv9YWnX28JSCMZJhC');
+        this.headers.set('Authorization', 'Bearer 4EdxvuurOx3qblzOB3H9G2Zry7yifKmpHqkN51m6');
         
         return this.mapRequest(
             this.http.get(url, {
@@ -88,7 +90,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'payment/payPal/accounts/';
         
-        this.headers.set('Authorization', 'Bearer NuQ33zCo8Mp3jU7Ws2g8asJMv9YWnX28JSCMZJhC');
+        this.headers.set('Authorization', 'Bearer 4EdxvuurOx3qblzOB3H9G2Zry7yifKmpHqkN51m6');
         
         return this.mapRequest(
             this.http.get(url, {

@@ -71,6 +71,8 @@ export class PermissionService extends TerraBaseService
         this._accountList = accounts;
     }
     
+    0
+    
     public addAccount(account:TerraLeafInterface)
     {
         this._accountList.push(account);
@@ -115,7 +117,8 @@ export class PermissionService extends TerraBaseService
             defaultWidth:      '74%',
             hidden:            false,
             name:              AccountDetailViewModule.getMainComponent(),
-            mainComponentName: AccountDetailViewModule.getMainComponent()
+            mainComponentName: AccountDetailViewModule.getMainComponent(),
+            parameter:         {}
         };
         
         this.addModule(details);

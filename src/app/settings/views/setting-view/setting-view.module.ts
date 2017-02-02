@@ -32,4 +32,9 @@ export class SettingViewModule
             providers: [],
         };
     }
+    
+    static getMainComponent():string
+    {
+        return 'SettingViewComponent';
+    }
 }

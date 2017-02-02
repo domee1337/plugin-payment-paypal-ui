@@ -59,5 +59,7 @@
   "successSaveAccount": "Konto gespeichert.",
   "successDeleteAccount": "Konto gelöscht.",
   "selectAll": "Alle auswählen",
-  "languageSettings": "Spracheinstellungen"
+  "languageSettings": "Spracheinstellungen",
+  "payPalInstallment": "Ratenkauf",
+  "payPalModeLabel": "Spezifische Bewerbung"
 }

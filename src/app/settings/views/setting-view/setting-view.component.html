@@ -1,44 +1,60 @@
 <div style="margin: 10px;">
-    <div class="row-container">
-        <div class="btnContainer">
-            <terra-button
-                [inputIsDisabled]="isLoading"
-                inputCaption="{{ 'save' | translate:lang }}"
-                inputIcon="icon-save"
-                (outputClicked)="saveSettings()">
-            </terra-button>
-        </div>
-        <div class="btnContainer">
-            <terra-button
-                [inputIsDisabled]="isLoading"
-                inputCaption="{{ 'reset' | translate:lang }}"
-                inputIcon="icon-reset"
-                (outputClicked)="resetSettings()">
-            </terra-button>
-        </div>
+    <div>
+        <terra-base-toolbar>
+            <div class="btn-group" role="group">
+                <terra-button inputIcon="icon-save" inputTooltipText="{{ 'save' | translate:lang }}" inputTooltipPlacement="bottom"
+                              [inputIsDisabled]="isLoading"
+                              (outputClicked)="saveSettings()"></terra-button>
+                <terra-button inputIcon="icon-reset" inputTooltipText="{{ 'reset' | translate:lang }}" inputTooltipPlacement="bottom"
+                              [inputIsDisabled]="isLoading"
+                              (outputClicked)="resetSettings()"></terra-button>
+            </div>
+        </terra-base-toolbar>
     </div>
     
-    <div class="row-container">
-        <div style="width: 100%;">
-            <terra-select-box inputName="{{ 'activeAccount' | translate:lang }}"
-                              [inputListBoxValues]="activeAccountValues"
-                              inputTooltipText="{{ 'activeAccount' | translate:lang }}"
-                              inputTooltipPlacement="top"
-                              [(inputSelectedValue)]="activeAccount">
-            </terra-select-box>
-        </div>
-    </div>
-    <div class="row-container">
-        <div style="width: 100%;">
-            <terra-select-box inputName="{{ 'priority' | translate:lang }}"
-                              [inputListBoxValues]="priorityValues"
-                              inputTooltipText="{{ 'priority' | translate:lang }}"
-                              inputTooltipPlacement="top"
-                              [(inputSelectedValue)]="priority">
-            </terra-select-box>
-        </div>
+    <div style="margin-top: 10px;">
+        <terra-portlet inputPortletHeader="{{'Allgemein'}}">
+            <div class="row-container" style="margin-top: 10px;">
+                <div style="width: 100%; padding-left: 10px;">
+                    <terra-select-box inputName="{{ 'activeAccount' | translate:lang }}"
+                                      [inputListBoxValues]="activeAccountValues"
+                                      inputTooltipText="{{ 'activeAccount' | translate:lang }}"
+                                      inputTooltipPlacement="top"
+                                      [(inputSelectedValue)]="activeAccount">
+                    </terra-select-box>
+                </div>
+            </div>
+            <div class="row-container">
+                <div style="width: 100%; padding-left: 10px;">
+                    <terra-select-box inputName="{{ 'priority' | translate:lang }}"
+                                      [inputListBoxValues]="priorityValues"
+                                      inputTooltipText="{{ 'priority' | translate:lang }}"
+                                      inputTooltipPlacement="top"
+                                      [(inputSelectedValue)]="priority">
+                    </terra-select-box>
+                </div>
+            </div>
+        </terra-portlet>
     </div>
     
+    <div *ngIf="payPalMode == 'paypal'">
+        <terra-portlet inputPortletHeader="{{ 'payPalModeLabel' | translate:lang }}">
+            <div class="row-container">
+                <div style="width: 100%; padding-left: 10px;">
+                    <terra-checkbox [inputCaption]="'PayPal PLUS'"></terra-checkbox>
+                </div>
+            </div>
+        </terra-portlet>
+    </div>
+    <div *ngIf="payPalMode == 'paypal_installment'">
+        <terra-portlet inputPortletHeader="{{ 'payPalModeLabel' | translate:lang }}">
+            <div class="row-container">
+                <div style="width: 100%; padding-left: 10px;">
+                    <terra-checkbox inputCaption="{{ 'payPalInstallment' | translate:lang }}"></terra-checkbox>
+                </div>
+            </div>
+        </terra-portlet>
+    </div>
     
     <div>
         <terra-portlet inputPortletHeader="{{'languageSettings' | translate:lang}}">
@@ -47,12 +63,11 @@
                     <terra-select-box inputName="{{ 'language' | translate:lang }}"
                                       [inputListBoxValues]="languageValues"
                                       inputTooltipText="{{ 'language' | translate:lang }}"
-                                      inputTooltipPlacement="bottom"
                                       (outputValueChanged)="changeLanguage($event)"
                                       [(inputSelectedValue)]="selectLang">
                     </terra-select-box>
                 </div>
-                <div style="width: 50%; padding: 0px 10px;">
+                <div style="width: 50%; padding: 0 10px;">
                     <terra-select-box inputName="{{ 'infoPage' | translate:lang }}"
                                       [inputListBoxValues]="infoPageValues"
                                       inputTooltipText="{{ 'infoPage' | translate:lang }}"
@@ -78,9 +93,7 @@
             </div>
         
         </terra-portlet>
-    
     </div>
-    
     
     <div class="row-container">
         <div style="width: 50%; padding-right: 10px;">

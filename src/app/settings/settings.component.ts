@@ -2,7 +2,8 @@ import {
     Component,
     OnInit,
     forwardRef,
-    Inject
+    Inject,
+    Input
 } from '@angular/core';
 import { TerraSplitViewInterface } from '@plentymarkets/terra-components/index';
 import { SettingViewModule } from './views/setting-view/setting-view.module';
@@ -17,6 +18,8 @@ import { PayPalUiComponent } from '../paypal-ui.component';
 
 export class SettingsComponent implements OnInit
 {
+    @Input() settingsMode:string;
+    
     private _modules:Array<TerraSplitViewInterface> = new Array;
     
     constructor(@Inject(forwardRef(() => PayPalUiComponent)) private payPalUiComponent:PayPalUiComponent,)
@@ -32,7 +35,8 @@ export class SettingsComponent implements OnInit
                                defaultWidth:      '15%',
                                hidden:            false,
                                name:              'Filter',
-                               mainComponentName: 'WebShopSelectorViewComponent'
+                               mainComponentName: WebShopSelectorModule.getMainComponent(),
+                               parameter:         {}
                            });
         
         this._modules.push({
@@ -40,7 +44,11 @@ export class SettingsComponent implements OnInit
                                defaultWidth:      '84%',
                                hidden:            false,
                                name:              'Setting',
-                               mainComponentName: 'SettingViewComponent'
+                               mainComponentName: SettingViewModule.getMainComponent(),
+                               parameter:         {
+                                   settingsMode: this.settingsMode
+                               }
+            
                            });
     }
     

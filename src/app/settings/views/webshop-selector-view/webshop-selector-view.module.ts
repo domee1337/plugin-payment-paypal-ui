@@ -24,4 +24,9 @@ export class WebShopSelectorModule
             providers: [],
         };
     }
+    
+    static getMainComponent():string
+    {
+        return 'WebShopSelectorViewComponent';
+    }
 }

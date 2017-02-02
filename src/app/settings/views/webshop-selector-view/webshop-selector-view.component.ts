@@ -39,7 +39,7 @@ export class WebShopSelectorViewComponent implements OnInit
         
         this._webStoresList = [
             {
-                caption:     'Webstores',
+                caption:     'Mandanten',
                 subLeafList: list
             }
         ];

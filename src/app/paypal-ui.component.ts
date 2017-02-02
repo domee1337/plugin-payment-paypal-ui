@@ -33,7 +33,7 @@ export class PayPalUiComponent extends Locale
         //Definitions for i18n
         if(process.env.ENV === 'production')
         {
-            this.localization.translationProvider('locale_');
+            this.localization.translationProvider('assets/lang/locale_');
         }
         else
         {

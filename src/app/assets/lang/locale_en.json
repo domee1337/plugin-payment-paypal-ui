@@ -59,5 +59,7 @@
   "successSaveAccount": "Account saved.",
   "successDeleteAccount": "Account deleted.",
   "selectAll": "Select All",
-  "languageSettings": "Language Setting"
+  "languageSettings": "Language Setting",
+  "payPalInstallment": "Installment",
+  "payPalModeLabel": "payPalModeLabel"
 }

@@ -3,7 +3,8 @@ import {
     OnInit,
     forwardRef,
     Inject,
-    ViewChild
+    ViewChild,
+    Input
 } from '@angular/core';
 import {
     TerraMultiSelectBoxValueInterface,
@@ -39,6 +40,7 @@ export class SettingViewComponent extends Locale implements OnInit
     private markup;
     
     private webstoreSelect;
+    private payPalMode:string;
     
     private isLoading:boolean = true;
     private languageValues:Array<TerraSelectBoxValueInterface>;
@@ -49,6 +51,8 @@ export class SettingViewComponent extends Locale implements OnInit
     private priorityValues:Array<TerraSelectBoxValueInterface>;
     private webstoreValues:Array<TerraSelectBoxValueInterface> = [];
     private activeAccountValues:Array<TerraSelectBoxValueInterface> = [];
+    
+    @Input() parameter:any;
     
     constructor(private settingsService:SettingsService,
                 @Inject(forwardRef(() => PayPalUiComponent)) private payPalUiComponent:PayPalUiComponent,
@@ -172,6 +176,11 @@ export class SettingViewComponent extends Locale implements OnInit
      */
     ngOnInit()
     {
+        if(this.parameter.settingsMode)
+        {
+            this.payPalMode = this.parameter.settingsMode
+        }
+        
         this.loadAccounts();
         this.loadWebstores();
     }
@@ -251,7 +260,7 @@ export class SettingViewComponent extends Locale implements OnInit
     {
         this.payPalUiComponent.callLoadingEvent(true);
         
-        this.service.getSettings().subscribe(
+        this.service.getSettings(this.payPalMode).subscribe(
             response =>
             {
                 this.mapSettings(response);
@@ -377,14 +386,23 @@ export class SettingViewComponent extends Locale implements OnInit
         this.setLanguageData();
         this.setMarkupData();
         
-        let data = {settings: []};
+        let webstores = [];
         
         for(var store in this.settings.webstore)
         {
-            data.settings.push({
-                                   [store]: this.settings.webstore[store]
-                               });
+            webstores.push({
+                               [store]: this.settings.webstore[store]
+                           });
         }
+        
+        let data = [
+            {
+                PayPalMode: this.payPalMode
+            },
+            {
+                settings: webstores
+            }
+        ];
         
         this.service.saveSettings(data).subscribe(
             response =>
