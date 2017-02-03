@@ -53,7 +53,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'rest/webstores/';
         
-        this.headers.set('Authorization', 'Bearer 4EdxvuurOx3qblzOB3H9G2Zry7yifKmpHqkN51m6');
+        //this.headers.set('Authorization', 'Bearer KSWbZAzwpmfqLXovFKfz5U5LkqzwrIsVOymXMm3v');
         
         return this.mapRequest(
             this.http.get(url, {
@@ -72,7 +72,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'rest/orders/shipping/countries/';
         
-        this.headers.set('Authorization', 'Bearer 4EdxvuurOx3qblzOB3H9G2Zry7yifKmpHqkN51m6');
+        //this.headers.set('Authorization', 'Bearer KSWbZAzwpmfqLXovFKfz5U5LkqzwrIsVOymXMm3v');
         
         return this.mapRequest(
             this.http.get(url, {
@@ -90,7 +90,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'payment/payPal/accounts/';
         
-        this.headers.set('Authorization', 'Bearer 4EdxvuurOx3qblzOB3H9G2Zry7yifKmpHqkN51m6');
+        //this.headers.set('Authorization', 'Bearer KSWbZAzwpmfqLXovFKfz5U5LkqzwrIsVOymXMm3v');
         
         return this.mapRequest(
             this.http.get(url, {

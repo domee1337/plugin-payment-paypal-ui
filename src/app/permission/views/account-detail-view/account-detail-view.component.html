@@ -2,8 +2,12 @@
     <div>
         <terra-base-toolbar>
             <div class="btn-group" role="group">
-                <terra-button inputIcon="icon-save" [inputIsDisabled]="isLoading" (outputClicked)="saveAccount()"></terra-button>
-                <terra-button inputIcon="icon-delete" [inputIsDisabled]="isLoading" (outputClicked)="deleteAccount()"></terra-button>
+                <terra-button inputIcon="icon-save" inputTooltipText="{{ 'save' | translate:lang }}" inputTooltipPlacement="bottom"
+                              [inputIsDisabled]="isLoading"
+                              (outputClicked)="saveAccount()"></terra-button>
+                <terra-button inputIcon="icon-delete" inputTooltipText="{{ 'reset' | translate:lang }}" inputTooltipPlacement="bottom"
+                              [inputIsDisabled]="isLoading"
+                              (outputClicked)="deleteAccount()"></terra-button>
             </div>
         </terra-base-toolbar>
     </div>
@@ -76,7 +80,7 @@
             
             </terra-portlet>
         </div>
-        <div style="width: 30%; padding-left: 10px;">
+        <div style="width: 30%; padding-left: 10px; display: none;">
             <terra-portlet inputPortletHeader="{{ 'expressButton' | translate:lang }}">
                 <div>
                     <input type="radio" name="ppExpressLogo" id="1" value="1">

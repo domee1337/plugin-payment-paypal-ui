@@ -30,13 +30,11 @@ export class SettingViewComponent extends Locale implements OnInit
     private service:SettingsService;
     private settings;
     
-    private activeAccount;
     private selectLang = 'de';
-    private webstore = 1000;
+    private webstore = 30;
     private name;
     private logo;
     private infoPage;
-    private priority;
     private markup;
     
     private webstoreSelect;
@@ -46,11 +44,25 @@ export class SettingViewComponent extends Locale implements OnInit
     private languageValues:Array<TerraSelectBoxValueInterface>;
     private infoPageValues:Array<TerraSelectBoxValueInterface>;
     private logoValues:Array<TerraSelectBoxValueInterface>;
-    private shippingCountryValues:Array<TerraMultiSelectBoxValueInterface> = [];
-    private shippingCountries:Array<any> = [];
     private priorityValues:Array<TerraSelectBoxValueInterface>;
     private webstoreValues:Array<TerraSelectBoxValueInterface> = [];
     private activeAccountValues:Array<TerraSelectBoxValueInterface> = [];
+    
+    //********************
+    private _selectedAccount;
+    private _accountListValues:Array<TerraSelectBoxValueInterface> = [];
+    
+    private _selectedPriority;
+    private _priorityListValues:Array<TerraSelectBoxValueInterface> = [];
+    
+    private _payPalPlus:boolean;
+    private _payPalInstallment:boolean;
+    
+    private _displayNameValue:string;
+    
+    private _selectedShippingCountry;
+    private _shippingCountryListValues:Array<TerraSelectBoxValueInterface> = [];
+    
     
     @Input() parameter:any;
     
@@ -132,7 +144,7 @@ export class SettingViewComponent extends Locale implements OnInit
             }
         ];
         
-        this.priorityValues = [
+        this._priorityListValues = [
             {
                 value:   '1',
                 caption: '',
@@ -160,7 +172,7 @@ export class SettingViewComponent extends Locale implements OnInit
             }
         ];
         
-        this.activeAccountValues = [
+        this._accountListValues = [
             {
                 value:   '',
                 caption: '---'
@@ -204,7 +216,7 @@ export class SettingViewComponent extends Locale implements OnInit
                                                            });
                                             });
             
-                           this.activeAccountValues = items;
+                           this._accountListValues = items;
             
                            this.payPalUiComponent.callLoadingEvent(false);
                            this.payPalUiComponent.isLoading = false;
@@ -225,97 +237,102 @@ export class SettingViewComponent extends Locale implements OnInit
     {
         this.payPalUiComponent.callLoadingEvent(true);
         
-        var value = [];
-        this.service.getWebstores().subscribe(
-            response =>
-            {
-                response.forEach((store) =>
-                                 {
-                                     value.push({
-                                                    value:   store.storeIdentifier,
-                                                    caption: store.name,
-                                                    active:  true
-                                                });
-                                 });
-                this.webstoreValues = value;
-                
-                this.payPalUiComponent.callLoadingEvent(false);
-                this.payPalUiComponent.isLoading = false;
-                this.isLoading = false;
-                
-                this.loadShippingCountries();
-            },
-            
-            error =>
-            {
-                this.payPalUiComponent.callLoadingEvent(false);
-                this.payPalUiComponent.callStatusEvent(this.localization.translate('errorLoadWebstores') + ': ' + error.statusText, 'danger');
-                this.payPalUiComponent.isLoading = false;
-                this.isLoading = false;
-            }
-        );
-    }
-    
-    public loadSettings()
-    {
-        this.payPalUiComponent.callLoadingEvent(true);
+        let value = [];
         
-        this.service.getSettings(this.payPalMode).subscribe(
-            response =>
-            {
-                this.mapSettings(response);
-                
-                this.payPalUiComponent.callLoadingEvent(false);
-                this.payPalUiComponent.isLoading = false;
-                this.isLoading = false;
-            },
+        this.service
+            .getWebstores()
+            .subscribe(response =>
+                       {
+                           response.forEach((item) =>
+                                            {
+                                                value.push({
+                                                               value:   item.storeIdentifier,
+                                                               caption: item.name,
+                                                               active:  true
+                                                           });
+                                            });
+                           this.webstoreValues = value;
             
-            error =>
-            {
-                this.payPalUiComponent.callLoadingEvent(false);
-                this.payPalUiComponent.callStatusEvent(this.localization.translate('errorLoadSettings') + ': ' + error.statusText, 'danger');
-                this.payPalUiComponent.isLoading = false;
-                this.isLoading = false;
-            }
-        );
+                           this.payPalUiComponent.callLoadingEvent(false);
+                           this.payPalUiComponent.isLoading = false;
+                           this.isLoading = false;
+            
+                           this.loadShippingCountries();
+                       },
+                       error =>
+                       {
+                           this.payPalUiComponent.callLoadingEvent(false);
+                           this.payPalUiComponent.callStatusEvent(this.localization.translate('errorLoadWebstores') + ': ' + error.statusText, 'danger');
+                           this.payPalUiComponent.isLoading = false;
+                           this.isLoading = false;
+                       }
+            );
     }
     
     public loadShippingCountries()
     {
         this.payPalUiComponent.callLoadingEvent(true);
         
-        var value = [];
-        this.service.getShippingCountries().subscribe(
-            response =>
-            {
-                response.forEach((shipping) =>
-                                 {
-                                     if(shipping['active'] == 1)
-                                     {
-                                         value.push({
-                                                        value:    shipping['id'],
-                                                        caption:  shipping['name'],
-                                                        selected: false
-                                                    });
-                                     }
-                                 });
+        let value:Array<TerraSelectBoxValueInterface> = [];
+        
+        this.service
+            .getShippingCountries()
+            .subscribe(response =>
+                       {
+                           response.forEach((item) =>
+                                            {
+                                                if(item['active'] == 1)
+                                                {
+                                                    value.push({
+                                                                   value:   item['id'],
+                                                                   caption: item['name'],
+                                                                   active:  false
+                                                               });
+                                                }
+                                            });
+            
+                           this._shippingCountryListValues = value;
+            
+                           this.payPalUiComponent.callLoadingEvent(false);
+                           this.payPalUiComponent.isLoading = false;
+                           this.isLoading = false;
+            
+                           this.loadSettings();
+                       },
+                       error =>
+                       {
+                           this.payPalUiComponent.callLoadingEvent(false);
+                           this.payPalUiComponent.callStatusEvent(this.localization.translate('errorLoadShippingCountries') + ': ' + error.statusText, 'danger');
+                           this.payPalUiComponent.isLoading = false;
+                           this.isLoading = false;
+                       }
+            );
+    }
+    
+    public loadSettings()
+    {
+        this.payPalUiComponent.callLoadingEvent(true);
+        
+        this.service
+            .getSettings(this.payPalMode)
+            .subscribe(
+                response =>
+                {
+                    this.mapSettings(response);
                 
-                this.shippingCountryValues = value;
-                
-                this.payPalUiComponent.callLoadingEvent(false);
-                this.payPalUiComponent.isLoading = false;
-                this.isLoading = false;
-                
-                this.loadSettings();
-            },
-            error =>
-            {
-                this.payPalUiComponent.callLoadingEvent(false);
-                this.payPalUiComponent.callStatusEvent(this.localization.translate('errorLoadShippingCountries') + ': ' + error.statusText, 'danger');
-                this.payPalUiComponent.isLoading = false;
-                this.isLoading = false;
-            }
-        );
+                    this.payPalUiComponent.callLoadingEvent(false);
+                    this.payPalUiComponent.isLoading = false;
+                    this.isLoading = false;
+                },
+            
+                error =>
+                {
+                    this.payPalUiComponent.callLoadingEvent(false);
+                    this.payPalUiComponent.callStatusEvent(this.localization.translate('errorLoadSettings') + ': ' + error.statusText, 'danger');
+                    this.payPalUiComponent.isLoading = false;
+                    this.isLoading = false;
+                }
+            );
     }
     
     private mapSettings(response:any):void
@@ -324,12 +341,12 @@ export class SettingViewComponent extends Locale implements OnInit
         {
             let settings = this.settings;
             
-            for(var res in response)
+            for(let res in response)
             {
-                for(var store in response[res])
+                for(let store in response[res])
                 {
-                    var PID = store.substr(4);
-                    var aktStore = response[res][store];
+                    let PID = store.substr(4);
+                    let aktStore = response[res][store];
                     
                     this.checkWebstoreExist(PID);
                     
@@ -364,17 +381,128 @@ export class SettingViewComponent extends Locale implements OnInit
                     
                     if('language' in aktStore)
                     {
-                        for(var lang in aktStore.language)
+                        for(let lang in aktStore.language)
                         {
                             this.checkLanguageExist(PID, lang);
                             settings.webstore[store].language[lang] = aktStore.language[lang];
                         }
+                    }
+                    
+                    if('account' in aktStore)
+                    {
+                        settings.webstore[store].account = aktStore.account;
+                    }
+                    
+                    if('payPalPlus' in aktStore)
+                    {
+                        settings.webstore[store].payPalPlus = aktStore.payPalPlus;
+                    }
+                    
+                    if('calcFinancing' in aktStore)
+                    {
+                        settings.webstore[store].calcFinancing = aktStore.calcFinancing;
                     }
                 }
             }
         }
         
         this.setCurrentData(this.webstore, this.selectLang);
+    }
+    
+    private checkWebstoreExist(webstore)
+    {
+        if(this.settings.webstore["PID_" + webstore] === undefined)
+        {
+            this.settings.webstore["PID_" + webstore] =
+                {
+                    language:          {},
+                    markup:            {
+                        webstore:  {
+                            flatDomestic:       0,
+                            flatForeign:        0,
+                            percentageDomestic: 0,
+                            percentageForeign:  0,
+                        },
+                        statistic: {
+                            flatDomestic:       0,
+                            flatForeign:        0,
+                            percentageDomestic: 0,
+                            percentageForeign:  0,
+                        }
+                    },
+                    priority:          0,
+                    shippingCountries: [],
+                    account:           0,
+                    payPalPlus:        0,
+                    calcFinancing:     0
+                };
+        }
+    }
+    
+    private setCurrentData(webstore = null, lang = null)
+    {
+        if(webstore && lang)
+        {
+            this.webstore = webstore;
+            this.selectLang = lang;
+        }
+        
+        let store = "PID_" + this.webstore;
+        
+        if(store in this.settings.webstore)
+        {
+            this._selectedPriority = this.settings.webstore[store].priority;
+            
+            this.markup = {
+                webstore:  {
+                    flatDomestic:       this.settings.webstore[store].markup.webstore.flatDomestic,
+                    flatForeign:        this.settings.webstore[store].markup.webstore.flatForeign,
+                    percentageDomestic: this.settings.webstore[store].markup.webstore.percentageDomestic,
+                    percentageForeign:  this.settings.webstore[store].markup.webstore.percentageForeign,
+                },
+                statistic: {
+                    flatDomestic:       this.settings.webstore[store].markup.statistic.flatDomestic,
+                    flatForeign:        this.settings.webstore[store].markup.statistic.flatForeign,
+                    percentageDomestic: this.settings.webstore[store].markup.statistic.percentageDomestic,
+                    percentageForeign:  this.settings.webstore[store].markup.statistic.percentageForeign,
+                }
+            };
+            
+            this._selectedShippingCountry = this.settings.webstore[store].shippingCountries;
+            
+            if(this.selectLang in this.settings.webstore[store].language)
+            {
+                this.infoPage = this.settings.webstore[store].language[this.selectLang].infoPage;
+                this._displayNameValue = this.settings.webstore[store].language[this.selectLang].name;
+                this.logo = this.settings.webstore[store].language[this.selectLang].logo;
+            }
+            else
+            {
+                this.infoPage = "0";
+                this.logo = "0";
+                this._displayNameValue = "";
+            }
+            
+            this._selectedAccount = this.settings.webstore[store].account;
+            
+            if(this.settings.webstore[store].payPalPlus == 1)
+            {
+                this._payPalPlus = true;
+            }
+            else
+            {
+                this._payPalPlus = false;
+            }
+            
+            if(this.settings.webstore[store].calcFinancing == 1)
+            {
+                this._payPalInstallment = true;
+            }
+            else
+            {
+                this._payPalInstallment = false;
+            }
+        }
     }
     
     private saveSettings():void
@@ -388,21 +516,17 @@ export class SettingViewComponent extends Locale implements OnInit
         
         let webstores = [];
         
-        for(var store in this.settings.webstore)
+        for(let store in this.settings.webstore)
         {
             webstores.push({
                                [store]: this.settings.webstore[store]
                            });
         }
         
-        let data = [
-            {
-                PayPalMode: this.payPalMode
-            },
-            {
-                settings: webstores
-            }
-        ];
+        let data = {
+            PayPalMode: this.payPalMode,
+            settings:   webstores
+        };
         
         this.service.saveSettings(data).subscribe(
             response =>
@@ -423,20 +547,39 @@ export class SettingViewComponent extends Locale implements OnInit
     
     private resetSettings():void
     {
-        
+        this._selectedPriority = 1;
+        this._payPalPlus = false;
+        this._payPalInstallment = false;
+        this._displayNameValue = "";
+        this._selectedShippingCountry = [];
+    
+        this.markup = {
+            webstore:  {
+                flatDomestic:       0,
+                flatForeign:        0,
+                percentageDomestic: 0,
+                percentageForeign:  0,
+            },
+            statistic: {
+                flatDomestic:       0,
+                flatForeign:        0,
+                percentageDomestic: 0,
+                percentageForeign:  0,
+            }
+        };
     }
     
     private getSelectedShippingCountries():Array<any>
     {
         let shippingCountryList = [];
         
-        this.shippingCountryValues.forEach((country) =>
-                                           {
-                                               if(country.selected === true)
-                                               {
-                                                   shippingCountryList.push(country.value);
-                                               }
-                                           });
+        this._shippingCountryListValues.forEach((country) =>
+                                                {
+                                                    if(country.active === true)
+                                                    {
+                                                        shippingCountryList.push(country.value);
+                                                    }
+                                                });
         
         return shippingCountryList;
     }
@@ -477,33 +620,6 @@ export class SettingViewComponent extends Locale implements OnInit
         this.setCurrentData();
     }
     
-    private checkWebstoreExist(webstore)
-    {
-        if(this.settings.webstore["PID_" + webstore] === undefined)
-        {
-            this.settings.webstore["PID_" + webstore] =
-                {
-                    language:          {},
-                    markup:            {
-                        webstore:  {
-                            flatDomestic:       0,
-                            flatForeign:        0,
-                            percentageDomestic: 0,
-                            percentageForeign:  0,
-                        },
-                        statistic: {
-                            flatDomestic:       0,
-                            flatForeign:        0,
-                            percentageDomestic: 0,
-                            percentageForeign:  0,
-                        }
-                    },
-                    priority:          0,
-                    shippingCountries: []
-                };
-        }
-    }
-    
     private checkLanguageExist(webstore, language)
     {
         this.checkWebstoreExist(webstore);
@@ -529,9 +645,27 @@ export class SettingViewComponent extends Locale implements OnInit
         /**
          * General settings
          */
-        this.settings.webstore["PID_" + this.webstore].priority = this.priority;
-        this.settings.webstore["PID_" + this.webstore].shippingCountries = this.shippingCountries;
+        this.settings.webstore["PID_" + this.webstore].priority = this._selectedPriority;
+        this.settings.webstore["PID_" + this.webstore].shippingCountries = this._selectedShippingCountry;
+        this.settings.webstore["PID_" + this.webstore].account = this._selectedAccount;
         
+        if(this._payPalPlus == true)
+        {
+            this.settings.webstore["PID_" + this.webstore].payPalPlus = 1;
+        }
+        else
+        {
+            this.settings.webstore["PID_" + this.webstore].payPalPlus = 0;
+        }
+        
+        if(this._payPalInstallment == true)
+        {
+            this.settings.webstore["PID_" + this.webstore].calcFinancing = 1;
+        }
+        else
+        {
+            this.settings.webstore["PID_" + this.webstore].calcFinancing = 0;
+        }
     }
     
     private setLanguageData()
@@ -544,7 +678,7 @@ export class SettingViewComponent extends Locale implements OnInit
         /**
          * Language settings
          */
-        this.settings.webstore["PID_" + this.webstore].language[this.selectLang].name = this.name;
+        this.settings.webstore["PID_" + this.webstore].language[this.selectLang].name = this._displayNameValue;
         this.settings.webstore["PID_" + this.webstore].language[this.selectLang].logo = this.logo;
         this.settings.webstore["PID_" + this.webstore].language[this.selectLang].infoPage = this.infoPage;
     }
@@ -569,46 +703,5 @@ export class SettingViewComponent extends Locale implements OnInit
         this.settings.webstore["PID_" + this.webstore].markup.statistic.percentageForeign = this.markup.statistic.percentageForeign;
     }
     
-    private setCurrentData(webstore = null, lang = null)
-    {
-        if(webstore && lang)
-        {
-            this.webstore = webstore;
-            this.selectLang = lang;
-        }
-        
-        var store = "PID_" + this.webstore;
-        if(store in this.settings.webstore)
-        {
-            this.priority = this.settings.webstore[store].priority;
-            this.markup = {
-                webstore:  {
-                    flatDomestic:       this.settings.webstore[store].markup.webstore.flatDomestic,
-                    flatForeign:        this.settings.webstore[store].markup.webstore.flatForeign,
-                    percentageDomestic: this.settings.webstore[store].markup.webstore.percentageDomestic,
-                    percentageForeign:  this.settings.webstore[store].markup.webstore.percentageForeign,
-                },
-                statistic: {
-                    flatDomestic:       this.settings.webstore[store].markup.statistic.flatDomestic,
-                    flatForeign:        this.settings.webstore[store].markup.statistic.flatForeign,
-                    percentageDomestic: this.settings.webstore[store].markup.statistic.percentageDomestic,
-                    percentageForeign:  this.settings.webstore[store].markup.statistic.percentageForeign,
-                }
-            };
-            
-            this.shippingCountries = this.settings.webstore[store].shippingCountries;
-            if(this.selectLang in this.settings.webstore[store].language)
-            {
-                this.infoPage = this.settings.webstore[store].language[this.selectLang].infoPage;
-                this.name = this.settings.webstore[store].language[this.selectLang].name;
-                this.logo = this.settings.webstore[store].language[this.selectLang].logo;
-            }
-            else
-            {
-                this.infoPage = "0";
-                this.logo = "0";
-                this.name = "";
-            }
-        }
-    }
+    
 }

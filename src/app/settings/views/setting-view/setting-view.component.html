@@ -17,20 +17,22 @@
             <div class="row-container" style="margin-top: 10px;">
                 <div style="width: 100%; padding-left: 10px;">
                     <terra-select-box inputName="{{ 'activeAccount' | translate:lang }}"
-                                      [inputListBoxValues]="activeAccountValues"
+                                      [inputListBoxValues]="_accountListValues"
                                       inputTooltipText="{{ 'activeAccount' | translate:lang }}"
                                       inputTooltipPlacement="top"
-                                      [(inputSelectedValue)]="activeAccount">
+                                      [(inputSelectedValue)]="_selectedAccount"
+                                      [inputIsDisabled]="isLoading">
                     </terra-select-box>
                 </div>
             </div>
             <div class="row-container">
                 <div style="width: 100%; padding-left: 10px;">
                     <terra-select-box inputName="{{ 'priority' | translate:lang }}"
-                                      [inputListBoxValues]="priorityValues"
+                                      [inputListBoxValues]="_priorityListValues"
                                       inputTooltipText="{{ 'priority' | translate:lang }}"
                                       inputTooltipPlacement="top"
-                                      [(inputSelectedValue)]="priority">
+                                      [(inputSelectedValue)]="_selectedPriority"
+                                      [inputIsDisabled]="isLoading">
                     </terra-select-box>
                 </div>
             </div>
@@ -38,10 +40,10 @@
     </div>
     
     <div *ngIf="payPalMode == 'paypal'">
-        <terra-portlet inputPortletHeader="{{ 'payPalModeLabel' | translate:lang }}">
+        <terra-portlet inputPortletHeader="{{ 'PayPal PLUS' | translate:lang }}">
             <div class="row-container">
                 <div style="width: 100%; padding-left: 10px;">
-                    <terra-checkbox [inputCaption]="'PayPal PLUS'"></terra-checkbox>
+                    <terra-checkbox [(value)]="_payPalPlus" [inputIsDisabled]="isLoading" [inputCaption]="'Aktivieren'"></terra-checkbox>
                 </div>
             </div>
         </terra-portlet>
@@ -50,7 +52,7 @@
         <terra-portlet inputPortletHeader="{{ 'payPalModeLabel' | translate:lang }}">
             <div class="row-container">
                 <div style="width: 100%; padding-left: 10px;">
-                    <terra-checkbox inputCaption="{{ 'payPalInstallment' | translate:lang }}"></terra-checkbox>
+                    <terra-checkbox [(value)]="_payPalInstallment" [inputIsDisabled]="isLoading" inputCaption="{{ 'payPalInstallment' | translate:lang }}"></terra-checkbox>
                 </div>
             </div>
         </terra-portlet>
@@ -80,7 +82,7 @@
             
             <div class="row-container">
                 <div style="width: 50%; padding-left: 10px;">
-                    <terra-text-input [(ngModel)]="name" inputName="{{ 'displayName' | translate:lang }}"></terra-text-input>
+                    <terra-text-input [(ngModel)]="_displayNameValue" inputName="{{ 'displayName' | translate:lang }}"></terra-text-input>
                 </div>
                 <div style="width: 50%; padding: 0px 10px;">
                     <terra-select-box inputName="{{ 'logo' | translate:lang }}"
@@ -98,10 +100,10 @@
     <div class="row-container">
         <div style="width: 50%; padding-right: 10px;">
             <terra-multi-select-box
-                [inputValueList]="shippingCountryValues"
+                [inputValueList]="_shippingCountryListValues"
                 [inputIsError]="error1"
                 inputName="{{ 'shippingCountries' | translate:lang }}"
-                [(inputSelectedValueList)]="shippingCountries">
+                [(inputSelectedValueList)]="_selectedShippingCountry">
             </terra-multi-select-box>
         </div>
         <div style="width: 50%; padding-left: 10px;">

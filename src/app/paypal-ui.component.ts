@@ -6,7 +6,6 @@ import {
 import { Locale } from 'angular2localization';
 import { LocaleService } from "angular2localization/angular2localization";
 import { LocalizationService } from "angular2localization/angular2localization";
-import { ComponentsHelper } from 'ng2-bootstrap';
 
 @Component({
                selector:        'paypal-ui',
@@ -22,13 +21,11 @@ export class PayPalUiComponent extends Locale
     private _viewContainerReference:ViewContainerRef;
     
     constructor(locale:LocaleService, localization:LocalizationService,
-                private _viewContainerRef:ViewContainerRef,
-                private _componentsHelper:ComponentsHelper,)
+                private _viewContainerRef:ViewContainerRef)
     {
         super(locale, localization);
         
         this._viewContainerReference = _viewContainerRef;
-        this._componentsHelper.setRootViewContainerRef(this._viewContainerRef);
         
         //Definitions for i18n
         if(process.env.ENV === 'production')
