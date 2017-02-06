@@ -31,7 +31,7 @@ export class SettingViewComponent extends Locale implements OnInit
     private settings;
     
     private selectLang = 'de';
-    private webstore = 30;
+    private webstore;
     private name;
     private logo;
     private infoPage;
@@ -194,7 +194,7 @@ export class SettingViewComponent extends Locale implements OnInit
         }
         
         this.loadAccounts();
-        this.loadWebstores();
+        //this.loadWebstores();
     }
     
     public loadAccounts()
@@ -210,9 +210,8 @@ export class SettingViewComponent extends Locale implements OnInit
                            response.forEach((acc) =>
                                             {
                                                 items.push({
-                                                               value:   acc.clientId,
-                                                               caption: acc.email,
-                                                               active:  true
+                                                               value:   acc.id,
+                                                               caption: acc.email
                                                            });
                                             });
             
@@ -221,6 +220,8 @@ export class SettingViewComponent extends Locale implements OnInit
                            this.payPalUiComponent.callLoadingEvent(false);
                            this.payPalUiComponent.isLoading = false;
                            this.isLoading = false;
+    
+                           this.loadWebstores();
                        },
         
                        error =>
@@ -237,12 +238,12 @@ export class SettingViewComponent extends Locale implements OnInit
     {
         this.payPalUiComponent.callLoadingEvent(true);
         
-        let value = [];
-        
         this.service
             .getWebstores()
             .subscribe(response =>
                        {
+                           let value = [];
+            
                            response.forEach((item) =>
                                             {
                                                 value.push({
@@ -251,7 +252,10 @@ export class SettingViewComponent extends Locale implements OnInit
                                                                active:  true
                                                            });
                                             });
+            
                            this.webstoreValues = value;
+            
+                           this.webstore = this.webstoreValues[0].value;
             
                            this.payPalUiComponent.callLoadingEvent(false);
                            this.payPalUiComponent.isLoading = false;
@@ -552,7 +556,7 @@ export class SettingViewComponent extends Locale implements OnInit
         this._payPalInstallment = false;
         this._displayNameValue = "";
         this._selectedShippingCountry = [];
-    
+        
         this.markup = {
             webstore:  {
                 flatDomestic:       0,
