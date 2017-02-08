@@ -50,15 +50,15 @@ export class AccountDetailViewComponent extends Locale implements OnInit
             {
                 caption: this.localization.translate('sale'),
                 value:   "Sale"
-            },
-            {
-                caption: this.localization.translate('authorization'),
-                value:   "Authorization"
-            },
-            {
-                caption: this.localization.translate('order'),
-                value:   "Order"
             }
+            //{
+            //    caption: this.localization.translate('authorization'),
+            //    value:   "Authorization"
+            //},
+            //{
+            //    caption: this.localization.translate('order'),
+            //    value:   "Order"
+            //}
         ];
         
         this.environments = [

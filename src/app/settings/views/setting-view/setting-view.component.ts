@@ -37,16 +37,12 @@ export class SettingViewComponent extends Locale implements OnInit
     private infoPage;
     private markup;
     
-    private webstoreSelect;
     private payPalMode:string;
     
     private isLoading:boolean = true;
     private languageValues:Array<TerraSelectBoxValueInterface>;
     private infoPageValues:Array<TerraSelectBoxValueInterface>;
     private logoValues:Array<TerraSelectBoxValueInterface>;
-    private priorityValues:Array<TerraSelectBoxValueInterface>;
-    private webstoreValues:Array<TerraSelectBoxValueInterface> = [];
-    private activeAccountValues:Array<TerraSelectBoxValueInterface> = [];
     
     //********************
     private _selectedAccount;
@@ -192,9 +188,12 @@ export class SettingViewComponent extends Locale implements OnInit
         {
             this.payPalMode = this.parameter.settingsMode
         }
+        if(this.parameter.PID)
+        {
+            this.webstore = this.parameter.PID;
+        }
         
         this.loadAccounts();
-        //this.loadWebstores();
     }
     
     public loadAccounts()
@@ -219,9 +218,9 @@ export class SettingViewComponent extends Locale implements OnInit
             
                            this.payPalUiComponent.callLoadingEvent(false);
                            this.payPalUiComponent.isLoading = false;
-                           this.isLoading = false;
+                           //this.isLoading = false;
     
-                           this.loadWebstores();
+                           this.loadShippingCountries();
                        },
         
                        error =>
@@ -232,45 +231,6 @@ export class SettingViewComponent extends Locale implements OnInit
                            this.isLoading = false;
                        });
         
-    }
-    
-    public loadWebstores()
-    {
-        this.payPalUiComponent.callLoadingEvent(true);
-        
-        this.service
-            .getWebstores()
-            .subscribe(response =>
-                       {
-                           let value = [];
-            
-                           response.forEach((item) =>
-                                            {
-                                                value.push({
-                                                               value:   item.storeIdentifier,
-                                                               caption: item.name,
-                                                               active:  true
-                                                           });
-                                            });
-            
-                           this.webstoreValues = value;
-            
-                           this.webstore = this.webstoreValues[0].value;
-            
-                           this.payPalUiComponent.callLoadingEvent(false);
-                           this.payPalUiComponent.isLoading = false;
-                           this.isLoading = false;
-            
-                           this.loadShippingCountries();
-                       },
-                       error =>
-                       {
-                           this.payPalUiComponent.callLoadingEvent(false);
-                           this.payPalUiComponent.callStatusEvent(this.localization.translate('errorLoadWebstores') + ': ' + error.statusText, 'danger');
-                           this.payPalUiComponent.isLoading = false;
-                           this.isLoading = false;
-                       }
-            );
     }
     
     public loadShippingCountries()
@@ -299,7 +259,7 @@ export class SettingViewComponent extends Locale implements OnInit
             
                            this.payPalUiComponent.callLoadingEvent(false);
                            this.payPalUiComponent.isLoading = false;
-                           this.isLoading = false;
+                           //this.isLoading = false;
             
                            this.loadSettings();
                        },

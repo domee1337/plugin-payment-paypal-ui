@@ -21,7 +21,6 @@ export class PermissionComponent extends Locale implements OnInit
     private _permissionService;
     private isLoading:boolean = true;
     
-    
     constructor(permissionService:PermissionService,
                 private payPalUiComponent:PayPalUiComponent,
                 locale:LocaleService,

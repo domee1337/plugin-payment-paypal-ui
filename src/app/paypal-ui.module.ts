@@ -14,6 +14,7 @@ import { LocaleService } from "angular2localization/angular2localization";
 import { LocalizationService } from "angular2localization/angular2localization";
 import { WebShopSelectorModule } from './settings/views/webshop-selector-view/webshop-selector-view.module';
 import { AccountService } from './permission/service/account.service';
+import { SplitViewService } from './settings/service/split-view.service';
 
 @NgModule({
               imports:      [
@@ -39,7 +40,8 @@ import { AccountService } from './permission/service/account.service';
                   PermissionService,
                   AccountService,
                   LocaleService,
-                  LocalizationService
+                  LocalizationService,
+                  SplitViewService
               ],
     
               bootstrap: [
