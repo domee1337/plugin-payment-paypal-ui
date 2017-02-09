@@ -8,7 +8,7 @@ export class AccountService extends TerraBaseService
 {
     constructor(loadingBarService:TerraLoadingBarService, http:Http)
     {
-        super(loadingBarService, http, 'http://master.plentymarkets.com/');
+        super(loadingBarService, http, '/');
     }
 
     public getAccounts():Observable<any>

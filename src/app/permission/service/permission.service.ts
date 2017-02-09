@@ -19,7 +19,7 @@ export class PermissionService extends TerraBaseService
 
     constructor(loadingBarService:TerraLoadingBarService, http:Http)
     {
-        super(loadingBarService, http, 'http://master.plentymarkets.com/');
+        super(loadingBarService, http, '/');
     }
 
     public get modules():Array<TerraSplitViewInterface>
