@@ -60,6 +60,6 @@
   "successDeleteAccount": "Account deleted.",
   "selectAll": "Select All",
   "languageSettings": "Language Setting",
-  "payPalInstallment": "Installment",
+  "payPalInstallment": "Activate calculation",
   "payPalModeLabel": "payPalModeLabel"
 }
