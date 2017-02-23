@@ -11,8 +11,8 @@ export class SettingsService extends TerraBaseService
 {
     constructor(loadingBarService:TerraLoadingBarService, http:Http)
     {
-        super(loadingBarService, http, 'http://master.plentymarkets.com/');
-        //super(loadingBarService, http, '/');
+        //super(loadingBarService, http, 'http://master.plentymarkets.com/rest/');
+        super(loadingBarService, http, 'rest/');
     
     }
     
@@ -53,9 +53,9 @@ export class SettingsService extends TerraBaseService
         
         let url:string;
         
-        url = this.url + 'rest/webstores/';
+        url = this.url + 'webstores/';
         
-        this.headers.set('Authorization', 'Bearer o9araEOPz7VJb4QMRSM9PZnzhbTNGlhfLxbeOXts');
+        //this.headers.set('Authorization', 'Bearer 6lUkRmU9zbZ0h7FWoZpj81HdRPJItGTbsVNamg5Z');
         
         return this.mapRequest(
             this.http.get(url, {
@@ -72,9 +72,9 @@ export class SettingsService extends TerraBaseService
         
         let url:string;
         
-        url = this.url + 'rest/orders/shipping/countries/';
+        url = this.url + 'orders/shipping/countries/';
         
-        this.headers.set('Authorization', 'Bearer o9araEOPz7VJb4QMRSM9PZnzhbTNGlhfLxbeOXts');
+        //this.headers.set('Authorization', 'Bearer 6lUkRmU9zbZ0h7FWoZpj81HdRPJItGTbsVNamg5Z');
         
         return this.mapRequest(
             this.http.get(url, {
@@ -92,7 +92,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'payment/payPal/accounts/';
         
-        this.headers.set('Authorization', 'Bearer o9araEOPz7VJb4QMRSM9PZnzhbTNGlhfLxbeOXts');
+        //this.headers.set('Authorization', 'Bearer 6lUkRmU9zbZ0h7FWoZpj81HdRPJItGTbsVNamg5Z');
         
         return this.mapRequest(
             this.http.get(url, {
