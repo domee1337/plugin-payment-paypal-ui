@@ -12,7 +12,7 @@ export class AccountService extends TerraBaseService
     constructor(loadingBarService:TerraLoadingBarService, http:Http)
     {
         //super(loadingBarService, http, 'http://master.plentymarkets.com/rest/payment/payPal/');
-        super(loadingBarService, http, 'rest/payment/payPal/');
+        super(loadingBarService, http, '/rest/payment/payPal/');
     }
     
     public getAccounts():Observable<any>
