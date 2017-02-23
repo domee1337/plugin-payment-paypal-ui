@@ -19,7 +19,8 @@ export class PermissionService extends TerraBaseService
     
     constructor(loadingBarService:TerraLoadingBarService, http:Http)
     {
-        super(loadingBarService, http, 'http://master.plentymarkets.com/');
+        //super(loadingBarService, http, 'http://master.plentymarkets.com/rest/payment/payPal/');
+        super(loadingBarService, http, 'rest/payment/payPal/');
     }
     
     public get modules():Array<TerraSplitViewInterface>
@@ -80,9 +81,11 @@ export class PermissionService extends TerraBaseService
     {
         this.setAuthorization();
         
+        //this.headers.set('Authorization', 'Bearer hvKOnOkvJc0u5yFz5fnzgXjoqXMRAOIQa5f0FGdV');
+        
         let url:string;
         
-        url = this.url + 'payment/payPal/accounts/';
+        url = this.url + 'accounts/';
         
         return this.mapRequest
                    (
@@ -97,9 +100,11 @@ export class PermissionService extends TerraBaseService
     {
         this.setAuthorization();
         
+        //this.headers.set('Authorization', 'Bearer hvKOnOkvJc0u5yFz5fnzgXjoqXMRAOIQa5f0FGdV');
+        
         let url:string;
         
-        url = this.url + 'payment/payPal/account/';
+        url = this.url + 'account/';
         
         return this.mapRequest(
             this.http.post(url, data, {headers: this.headers})

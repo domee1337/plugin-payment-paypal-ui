@@ -13,7 +13,6 @@ export class SettingsService extends TerraBaseService
     {
         //super(loadingBarService, http, 'http://master.plentymarkets.com/rest/');
         super(loadingBarService, http, 'rest/');
-    
     }
     
     // TODO set parameter for paypal plus installment
@@ -55,7 +54,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'webstores/';
         
-        //this.headers.set('Authorization', 'Bearer 6lUkRmU9zbZ0h7FWoZpj81HdRPJItGTbsVNamg5Z');
+        //this.headers.set('Authorization', 'Bearer hvKOnOkvJc0u5yFz5fnzgXjoqXMRAOIQa5f0FGdV');
         
         return this.mapRequest(
             this.http.get(url, {
@@ -74,7 +73,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'orders/shipping/countries/';
         
-        //this.headers.set('Authorization', 'Bearer 6lUkRmU9zbZ0h7FWoZpj81HdRPJItGTbsVNamg5Z');
+        //this.headers.set('Authorization', 'Bearer hvKOnOkvJc0u5yFz5fnzgXjoqXMRAOIQa5f0FGdV');
         
         return this.mapRequest(
             this.http.get(url, {
@@ -92,7 +91,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'payment/payPal/accounts/';
         
-        //this.headers.set('Authorization', 'Bearer 6lUkRmU9zbZ0h7FWoZpj81HdRPJItGTbsVNamg5Z');
+        //this.headers.set('Authorization', 'Bearer hvKOnOkvJc0u5yFz5fnzgXjoqXMRAOIQa5f0FGdV');
         
         return this.mapRequest(
             this.http.get(url, {

@@ -13,13 +13,14 @@ export class AccountService extends TerraBaseService
     {
         //super(loadingBarService, http, 'http://master.plentymarkets.com/rest/payment/payPal/');
         super(loadingBarService, http, 'rest/payment/payPal/');
-    
     }
     
     public getAccounts():Observable<any>
     {
         this.setAuthorization();
-        
+    
+        //this.headers.set('Authorization', 'Bearer hvKOnOkvJc0u5yFz5fnzgXjoqXMRAOIQa5f0FGdV');
+    
         let url:string;
         
         url = this.url + 'accounts/';
@@ -52,7 +53,9 @@ export class AccountService extends TerraBaseService
     public saveAccount(data:any):Observable<any>
     {
         this.setAuthorization();
-        
+    
+        //this.headers.set('Authorization', 'Bearer hvKOnOkvJc0u5yFz5fnzgXjoqXMRAOIQa5f0FGdV');
+    
         let url:string;
         
         url = this.url + 'account';
