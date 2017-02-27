@@ -18,7 +18,6 @@ export class SettingsService extends TerraBaseService
     // TODO set parameter for paypal plus installment
     public getSettings(payPalMode:string):Observable<any>
     {
-        
         this.setAuthorization();
         
         let url:string;
@@ -54,7 +53,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'webstores/';
         
-        //this.headers.set('Authorization', 'Bearer hvKOnOkvJc0u5yFz5fnzgXjoqXMRAOIQa5f0FGdV');
+        //this.headers.set('Authorization', 'Bearer hhPhh4iexOt5hi6mM5AoQTkQy6RmWOBXhaOkjJpW');
         
         return this.mapRequest(
             this.http.get(url, {
@@ -73,7 +72,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'orders/shipping/countries/';
         
-        //this.headers.set('Authorization', 'Bearer hvKOnOkvJc0u5yFz5fnzgXjoqXMRAOIQa5f0FGdV');
+        //this.headers.set('Authorization', 'Bearer hhPhh4iexOt5hi6mM5AoQTkQy6RmWOBXhaOkjJpW');
         
         return this.mapRequest(
             this.http.get(url, {
@@ -91,7 +90,7 @@ export class SettingsService extends TerraBaseService
         
         url = this.url + 'payment/payPal/accounts/';
         
-        //this.headers.set('Authorization', 'Bearer hvKOnOkvJc0u5yFz5fnzgXjoqXMRAOIQa5f0FGdV');
+        //this.headers.set('Authorization', 'Bearer hhPhh4iexOt5hi6mM5AoQTkQy6RmWOBXhaOkjJpW');
         
         return this.mapRequest(
             this.http.get(url, {

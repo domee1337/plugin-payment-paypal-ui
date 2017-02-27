@@ -11,6 +11,7 @@ import { LocalizationService } from "angular2localization/angular2localization";
 import { AccountService } from '../../service/account.service';
 import { PayPalUiComponent } from '../../../paypal-ui.component';
 import { PermissionService } from '../../service/permission.service';
+import { AccountInterface } from '../../service/data/account.interface';
 
 @Component({
                selector: 'accountDetails',
@@ -30,13 +31,12 @@ export class AccountDetailViewComponent extends Locale implements OnInit
     
     private paymentAction;
     private paymentActionValues:Array<TerraSelectBoxValueInterface>;
-    private environment;
-    private environments:Array<TerraSelectBoxValueInterface>;
     private logo;
     private basket;
     private expressButton;
     
-    private myValue:number;
+    private _environmentsValueList:Array<TerraSelectBoxValueInterface>;
+    private _selectedEnvironments:any;
     
     constructor(private accountService:AccountService,
                 @Inject(forwardRef(() => PermissionService)) permissionService:PermissionService,
@@ -46,6 +46,12 @@ export class AccountDetailViewComponent extends Locale implements OnInit
     {
         super(locale, localization);
         
+        this.service = accountService;
+        this._permissionService = permissionService;
+    }
+    
+    ngOnInit()
+    {
         this.paymentActionValues = [
             {
                 caption: this.localization.translate('sale'),
@@ -61,7 +67,7 @@ export class AccountDetailViewComponent extends Locale implements OnInit
             //}
         ];
         
-        this.environments = [
+        this._environmentsValueList = [
             {
                 caption: this.localization.translate('live'),
                 value:   0
@@ -72,18 +78,8 @@ export class AccountDetailViewComponent extends Locale implements OnInit
             }
         ];
         
-        this.service = accountService;
-        this._permissionService = permissionService;
-    }
-    
-    /*
-     * belong to OnInit Lifecycle hook
-     * get called right after the directive's data-bound properties have been checked for the
-     * first time, and before any of its children have been checked. It is invoked only once when the
-     * directive is instantiated
-     */
-    ngOnInit()
-    {
+        this._selectedEnvironments = this._permissionService.currentAccount.environment;
+        
         this.isLoading = false;
     }
     
@@ -92,9 +88,19 @@ export class AccountDetailViewComponent extends Locale implements OnInit
         this.isLoading = true;
         this.payPalUiComponent.callLoadingEvent(true);
         
+        let item:AccountInterface = {
+            id:            this._permissionService.currentAccount.id,
+            clientId:      this._permissionService.currentAccount.clientId,
+            clientSecret:  this._permissionService.currentAccount.clientSecret,
+            email:         this._permissionService.currentAccount.email,
+            environment:   this._selectedEnvironments,
+            logo:          this._permissionService.currentAccount.logo,
+            paymentAction: this._permissionService.currentAccount.paymentAction
+        };
+        
         let data = {
             account: {
-                [this._permissionService.currentAccountId]: this._permissionService.currentAccount
+                [this._permissionService.currentAccountId]: item
             }
         };
         

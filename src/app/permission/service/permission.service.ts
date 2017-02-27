@@ -8,6 +8,7 @@ import {
 import { Http } from "@angular/http";
 import { Observable } from "rxjs";
 import { AccountDetailViewModule } from '../views/account-detail-view/account-detail-view.module';
+import { AccountInterface } from './data/account.interface';
 
 @Injectable()
 export class PermissionService extends TerraBaseService
@@ -42,12 +43,12 @@ export class PermissionService extends TerraBaseService
         this._modules.push(module);
     }
     
-    public get currentAccount():any
+    public get currentAccount():AccountInterface
     {
         return this._currentAccount;
     }
     
-    public set currentAccount(account:any)
+    public set currentAccount(account:AccountInterface)
     {
         this._currentAccount = account;
     }
@@ -81,7 +82,7 @@ export class PermissionService extends TerraBaseService
     {
         this.setAuthorization();
         
-        //this.headers.set('Authorization', 'Bearer hvKOnOkvJc0u5yFz5fnzgXjoqXMRAOIQa5f0FGdV');
+        //this.headers.set('Authorization', 'Bearer hhPhh4iexOt5hi6mM5AoQTkQy6RmWOBXhaOkjJpW');
         
         let url:string;
         
@@ -100,7 +101,7 @@ export class PermissionService extends TerraBaseService
     {
         this.setAuthorization();
         
-        //this.headers.set('Authorization', 'Bearer hvKOnOkvJc0u5yFz5fnzgXjoqXMRAOIQa5f0FGdV');
+        //this.headers.set('Authorization', 'Bearer hhPhh4iexOt5hi6mM5AoQTkQy6RmWOBXhaOkjJpW');
         
         let url:string;
         

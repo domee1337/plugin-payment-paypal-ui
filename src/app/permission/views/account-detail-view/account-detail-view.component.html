@@ -45,10 +45,10 @@
                 <div class="row-container">
                     <div style="width: 100%; padding-left: 10px;">
                         <terra-select-box inputName="{{ 'environment' | translate:lang }}"
-                                          [inputListBoxValues]="environments"
                                           inputTooltipText="{{ 'environment' | translate:lang }}"
                                           inputTooltipPlacement="top"
-                                          [(inputSelectedValue)]="_permissionService.currentAccount.environment">
+                                          [inputListBoxValues]="_environmentsValueList"
+                                          [(inputSelectedValue)]="_selectedEnvironments">
                         </terra-select-box>
                     </div>
                 </div>

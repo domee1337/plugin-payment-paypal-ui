@@ -219,7 +219,7 @@ export class SettingViewComponent extends Locale implements OnInit
                            this.payPalUiComponent.callLoadingEvent(false);
                            this.payPalUiComponent.isLoading = false;
                            //this.isLoading = false;
-    
+            
                            this.loadShippingCountries();
                        },
         
