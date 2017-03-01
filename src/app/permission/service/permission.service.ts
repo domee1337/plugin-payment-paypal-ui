@@ -119,7 +119,7 @@ export class PermissionService extends TerraBaseService
         
         details = {
             module:            AccountDetailViewModule.forRoot(),
-            defaultWidth:      '74%',
+            defaultWidth:      'col-xs-10',
             hidden:            false,
             name:              AccountDetailViewModule.getMainComponent(),
             mainComponentName: AccountDetailViewModule.getMainComponent(),
