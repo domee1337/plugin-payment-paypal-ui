@@ -20,7 +20,6 @@ import {
                template: require('./account-selector-view.component.html'),
                styles:   [require('./account-selector-view.component.scss')]
            })
-
 export class AccountSelectorViewComponent extends Locale implements OnInit
 {
     @ViewChild('viewOverlayPayPalAddAccount') public viewOverlayPayPalAddAccount:TerraOverlayComponent;

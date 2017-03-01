@@ -12,7 +12,6 @@ import { SettingViewModule } from '../setting-view/setting-view.module';
                template: require('./webshop-selector-view.component.html'),
                styles:   [require('./webshop-selector-view.component.scss')]
            })
-
 export class WebShopSelectorViewComponent implements OnInit
 {
     private _webStoresList:Array<TerraLeafInterface>;

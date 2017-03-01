@@ -44,7 +44,7 @@ export class PermissionComponent extends Locale implements OnInit
         this._permissionService.modules = [
             {
                 module:            AccountSelectorViewModule.forRoot(),
-                defaultWidth:      '23.0%',
+                defaultWidth:      'col-xs-2',
                 hidden:            false,
                 name:              this.localization.translate('accounts'),
                 mainComponentName: AccountSelectorViewModule.getMainComponent(),

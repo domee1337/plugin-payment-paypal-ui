@@ -18,7 +18,6 @@ import { AccountInterface } from '../../service/data/account.interface';
                template: require('./account-detail-view.component.html'),
                styles:   [require('./account-detail-view.component.scss')]
            })
-
 export class AccountDetailViewComponent extends Locale implements OnInit
 {
     private service:AccountService;
