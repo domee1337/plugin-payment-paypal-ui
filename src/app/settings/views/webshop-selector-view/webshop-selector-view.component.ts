@@ -40,7 +40,7 @@ export class WebShopSelectorViewComponent implements OnInit
                                                                             this._splitViewService
                                                                                 .addModule({
                                                                                                module:            SettingViewModule.forRoot(),
-                                                                                               defaultWidth:      '84%',
+                                                                                               defaultWidth:      'col-xs-10',
                                                                                                hidden:            false,
                                                                                                name:              'Setting',
                                                                                                mainComponentName: SettingViewModule.getMainComponent(),
