@@ -1,0 +1,30 @@
+<div>
+    <div>
+        <terra-base-toolbar>
+            <terra-button [inputIsPrimary]="true"
+                          inputIcon="icon-add"
+                          inputCaption="{{ 'addNewPayPalAccount' | translate:lang}}"
+                          (outputClicked)="openOverlayPayPalAddAccount()"></terra-button>
+        </terra-base-toolbar>
+    </div>
+    <div>
+        <terra-tree [inputLeafList]="_permissionService._accountList"></terra-tree>
+    </div>
+</div>
+
+
+<terra-overlay
+    #viewOverlayPayPalAddAccount
+    [inputPrimaryButtonInterface]="_addAccountButton"
+    [inputSecondaryButtonInterface]="_closeButton"
+    inputOverlayTitle="{{ 'addNewPayPalAccount' | translate:lang }}">
+    <div class="row">
+        <div class="col-md-12">
+            <terra-text-input [(ngModel)]="email" inputName="{{ 'email' | translate:lang }}"></terra-text-input>
+            <terra-text-input [(ngModel)]="clientId" inputName="{{ 'clientId' | translate:lang }}"></terra-text-input>
+            <terra-text-input [(ngModel)]="clientSecret" inputName="{{ 'clientSecret' | translate:lang }}"></terra-text-input>
+        </div>
+    </div>
+</terra-overlay>
+
+

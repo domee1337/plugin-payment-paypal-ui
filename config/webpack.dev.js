@@ -5,8 +5,6 @@ const DefinePlugin = require('webpack/lib/DefinePlugin');
 const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
 const ENV = process.env.ENV = process.env.NODE_ENV = 'development';
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3000;
@@ -17,7 +15,6 @@ const METADATA = webpackMerge(commonConfig({env: ENV}).metadata, {
     ENV: ENV,
     HMR: HMR
 });
-
 
 module.exports = function (options) {
     return webpackMerge(commonConfig({env: ENV}), {
@@ -32,11 +29,6 @@ module.exports = function (options) {
         },
 
         plugins: [
-
-            new ExtractTextPlugin({
-                filename: '[name].css',
-                allChunks: true
-            }),
 
             // NOTE: when adding more properties, make sure you include them in custom-typings.d.ts
             new DefinePlugin({
@@ -62,4 +54,4 @@ module.exports = function (options) {
         }
 
     });
-}
+};

@@ -10,7 +10,11 @@
     <permissions></permissions>
 </div>
 
-<div *ngIf="action == 'settings'" [hidden]="isLoading">
-    <settings></settings>
+<div *ngIf="action == 'settings_paypal'" [hidden]="isLoading">
+    <settings settingsMode="paypal"></settings>
+</div>
+
+<div *ngIf="action == 'settings_paypal_installment'" [hidden]="isLoading">
+    <settings settingsMode="paypal_installment"></settings>
 </div>
 

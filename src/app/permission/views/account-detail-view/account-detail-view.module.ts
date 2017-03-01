@@ -4,7 +4,7 @@ import {
     ModuleWithProviders
 } from '@angular/core';
 import { TerraComponentsModule } from '@plentymarkets/terra-components/app';
-import { AccountDetailsComponent } from './accountDetails.component';
+import { AccountDetailViewComponent } from './account-detail-view.component';
 import {
     LocaleModule,
     LocalizationModule
@@ -19,19 +19,19 @@ import { FormsModule } from '@angular/forms';
                   FormsModule,
                   TerraComponentsModule.forRoot()
               ],
-              declarations: [AccountDetailsComponent]
+              declarations: [AccountDetailViewComponent]
           })
-export class AccountDetailsModule
+export class AccountDetailViewModule
 {
     static forRoot():ModuleWithProviders
     {
         return {
-            ngModule:  AccountDetailsModule
+            ngModule: AccountDetailViewModule
         };
     }
     
     static getMainComponent():string
     {
-        return 'AccountDetailsComponent';
+        return 'AccountDetailViewComponent';
     }
 }
