@@ -20,12 +20,9 @@ export class PermissionService extends TerraBaseService
     
     constructor(loadingBarService:TerraLoadingBarService, http:Http)
     {
-<<<<<<< HEAD
-        super(loadingBarService, http, '/');
-=======
         //super(loadingBarService, http, 'http://master.plentymarkets.com/rest/payment/payPal/');
         super(loadingBarService, http, '/rest/payment/payPal/');
->>>>>>> ui_facelift
+
     }
     
     public get modules():Array<TerraSplitViewInterface>

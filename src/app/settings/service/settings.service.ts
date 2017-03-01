@@ -11,12 +11,8 @@ export class SettingsService extends TerraBaseService
 {
     constructor(loadingBarService:TerraLoadingBarService, http:Http)
     {
-<<<<<<< HEAD
-        super(loadingBarService, http, '/');
-=======
         //super(loadingBarService, http, 'http://master.plentymarkets.com/rest/');
         super(loadingBarService, http, '/rest/');
->>>>>>> ui_facelift
     }
     
     // TODO set parameter for paypal plus installment
