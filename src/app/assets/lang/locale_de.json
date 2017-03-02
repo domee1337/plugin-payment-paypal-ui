@@ -62,5 +62,6 @@
   "languageSettings": "Spracheinstellungen",
   "payPalInstallment": "Berechnung aktivieren",
   "payPalModeLabel": "Spezifische Bewerbung",
-  "general": "Allgemein"
+  "general": "Allgemein",
+  "activate": "Aktivieren"
 }

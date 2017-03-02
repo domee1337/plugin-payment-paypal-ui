@@ -62,5 +62,6 @@
   "languageSettings": "Language Setting",
   "payPalInstallment": "Activate calculation",
   "payPalModeLabel": "payPalModeLabel",
-  "general": "General"
+  "general": "General",
+  "activate": "Activate"
 }
