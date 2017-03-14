@@ -4,8 +4,10 @@ import {
     ViewContainerRef
 } from '@angular/core';
 import { Locale } from 'angular2localization';
-import { LocaleService } from "angular2localization/angular2localization";
-import { LocalizationService } from "angular2localization/angular2localization";
+import {
+    LocaleService,
+    LocalizationService
+} from 'angular2localization/angular2localization';
 
 @Component({
                selector:        'paypal-ui',
@@ -20,7 +22,8 @@ export class PayPalUiComponent extends Locale
     private _isLoading = true;
     private _viewContainerReference:ViewContainerRef;
     
-    constructor(locale:LocaleService, localization:LocalizationService,
+    constructor(locale:LocaleService,
+                localization:LocalizationService,
                 private _viewContainerRef:ViewContainerRef)
     {
         super(locale, localization);
@@ -49,7 +52,7 @@ export class PayPalUiComponent extends Locale
     
     private getUrlVars()
     {
-        var vars = {};
+        let vars = {};
         
         window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(substring:string, ...args:any[]):string
         {

@@ -19,7 +19,9 @@ import { FormsModule } from '@angular/forms';
                   FormsModule,
                   TerraComponentsModule.forRoot()
               ],
-              declarations: [AccountDetailViewComponent]
+              declarations: [
+                  AccountDetailViewComponent
+              ]
           })
 export class AccountDetailViewModule
 {

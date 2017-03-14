@@ -3,14 +3,9 @@ import {
     OnInit,
     forwardRef,
     Inject,
-    ViewChild,
     Input
 } from '@angular/core';
-import {
-    TerraMultiSelectBoxValueInterface,
-    TerraSelectBoxValueInterface,
-} from '@plentymarkets/terra-components/index';
-import set = Reflect.set;
+import { TerraSelectBoxValueInterface } from '@plentymarkets/terra-components';
 import {
     LocaleService,
     LocalizationService,
@@ -18,6 +13,7 @@ import {
 } from 'angular2localization';
 import { PayPalUiComponent } from '../../../paypal-ui.component';
 import { SettingsService } from '../../service/settings.service';
+import set = Reflect.set;
 
 @Component({
                selector: 'setting-view',
@@ -249,8 +245,7 @@ export class SettingViewComponent extends Locale implements OnInit
                                                 {
                                                     value.push({
                                                                    value:   item['id'],
-                                                                   caption: item['name'],
-                                                                   active:  false
+                                                                   caption: item['name']
                                                                });
                                                 }
                                             });
@@ -539,10 +534,10 @@ export class SettingViewComponent extends Locale implements OnInit
         
         this._shippingCountryListValues.forEach((country) =>
                                                 {
-                                                    if(country.active === true)
-                                                    {
-                                                        shippingCountryList.push(country.value);
-                                                    }
+                                                    //if(country.active === true)
+                                                    //{
+                                                    //    shippingCountryList.push(country.value);
+                                                    //}
                                                 });
         
         return shippingCountryList;
