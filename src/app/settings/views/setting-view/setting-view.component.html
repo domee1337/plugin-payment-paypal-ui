@@ -20,7 +20,7 @@
                                       [inputListBoxValues]="_accountListValues"
                                       inputTooltipText="{{ 'activeAccount' | translate:lang }}"
                                       inputTooltipPlacement="top"
-                                      [(inputSelectedValue)]="_selectedAccount"
+                                      [(ngModel)]="_selectedAccount"
                                       [inputIsDisabled]="isLoading">
                     </terra-select-box>
                 </div>
@@ -31,7 +31,7 @@
                                       [inputListBoxValues]="_priorityListValues"
                                       inputTooltipText="{{ 'priority' | translate:lang }}"
                                       inputTooltipPlacement="top"
-                                      [(inputSelectedValue)]="_selectedPriority"
+                                      [(ngModel)]="_selectedPriority"
                                       [inputIsDisabled]="isLoading">
                     </terra-select-box>
                 </div>
@@ -70,7 +70,7 @@
                                       [inputListBoxValues]="languageValues"
                                       inputTooltipText="{{ 'language' | translate:lang }}"
                                       (outputValueChanged)="changeLanguage($event)"
-                                      [(inputSelectedValue)]="selectLang"
+                                      [(ngModel)]="selectLang"
                                       [inputIsDisabled]="isLoading">
                     </terra-select-box>
                 </div>
@@ -79,7 +79,7 @@
                                       [inputListBoxValues]="infoPageValues"
                                       inputTooltipText="{{ 'infoPage' | translate:lang }}"
                                       inputTooltipPlacement="top"
-                                      [(inputSelectedValue)]="infoPage"
+                                      [(ngModel)]="infoPage"
                                       [inputIsDisabled]="isLoading">
                     </terra-select-box>
                 </div>
@@ -90,14 +90,14 @@
                 <div style="width: 50%; padding-left: 10px;">
                     <terra-text-input [(ngModel)]="_displayNameValue"
                                       inputName="{{ 'displayName' | translate:lang }}"
-                                      [inputIsDisabled]="isLoading"></terra-text-input>
+                                      [inputIsDisabled]="true"></terra-text-input>
                 </div>
                 <div style="width: 50%; padding: 0px 10px;">
                     <terra-select-box inputName="{{ 'logo' | translate:lang }}"
                                       [inputListBoxValues]="logoValues"
                                       inputTooltipText="{{ 'logo' | translate:lang }}"
                                       inputTooltipPlacement="top"
-                                      [(inputSelectedValue)]="logo"
+                                      [(ngModel)]="logo"
                                       [inputIsDisabled]="isLoading">
                     </terra-select-box>
                 </div>
@@ -107,7 +107,7 @@
     </div>
     
     <div class="row-container">
-        <div style="width: 50%; padding-right: 10px;">
+        <div style="width: 50%;">
             <terra-multi-select-box
                 [inputValueList]="_shippingCountryListValues"
                 [inputIsError]="error1"
@@ -116,7 +116,8 @@
                 [inputIsDisabled]="isLoading">
             </terra-multi-select-box>
         </div>
-        <div style="width: 50%; padding-left: 10px;">
+        <!--<div style="width: 50%; padding-left: 10px;">-->
+        <div style="display: none;">
             <terra-portlet inputPortletHeader="{{ 'markupWebstore' | translate:lang }}">
                 <terra-double-input [(ngModel)]="markup.webstore.flatDomestic"
                                     inputName="{{ 'flatDomestic' | translate:lang }}"

@@ -7,6 +7,7 @@ import {
     LocalizationModule
 } from 'angular2localization';
 import { FormsModule } from '@angular/forms';
+import { TooltipModule } from 'ng2-bootstrap';
 
 @NgModule({
               imports:      [
@@ -14,7 +15,8 @@ import { FormsModule } from '@angular/forms';
                   FormsModule,
                   LocaleModule,
                   LocalizationModule,
-                  TerraComponentsModule.forRoot()
+                  TerraComponentsModule.forRoot(),
+                  TooltipModule.forRoot()
               ],
               declarations: [
                   SettingViewComponent

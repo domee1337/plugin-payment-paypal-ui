@@ -57,7 +57,8 @@ export class WebShopSelectorViewComponent implements OnInit
         this._webStoresList = [
             {
                 caption:     'Mandanten',
-                subLeafList: list
+                subLeafList: list,
+                isOpen: true
             }
         ];
         

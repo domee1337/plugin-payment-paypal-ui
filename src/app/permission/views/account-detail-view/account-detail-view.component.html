@@ -48,7 +48,7 @@
                                           inputTooltipText="{{ 'environment' | translate:lang }}"
                                           inputTooltipPlacement="top"
                                           [inputListBoxValues]="_environmentsValueList"
-                                          [(inputSelectedValue)]="_selectedEnvironments">
+                                          [(ngModel)]="_selectedEnvironments">
                         </terra-select-box>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
                                           [inputListBoxValues]="paymentActionValues"
                                           inputTooltipText="{{ 'paymentEntry' | translate:lang }}"
                                           inputTooltipPlacement="top"
-                                          [(inputSelectedValue)]="_permissionService.currentAccount.paymentAction">
+                                          [(ngModel)]="_permissionService.currentAccount.paymentAction">
                         </terra-select-box>
                     </div>
                 </div>

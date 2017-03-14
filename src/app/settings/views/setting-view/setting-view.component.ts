@@ -20,7 +20,6 @@ import set = Reflect.set;
                template: require('./setting-view.component.html'),
                styles:   [require('./setting-view.component.scss')]
            })
-
 export class SettingViewComponent extends Locale implements OnInit
 {
     private service:SettingsService;
