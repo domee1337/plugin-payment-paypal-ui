@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import {
-    TerraLoadingBarService,
-    TerraBaseService
+    TerraBaseService,
+    TerraLoadingSpinnerService
 } from '@plentymarkets/terra-components';
 import { Observable } from 'rxjs';
 
 @Injectable()
 export class SettingsService extends TerraBaseService
 {
-    constructor(loadingBarService:TerraLoadingBarService, http:Http)
+    constructor(private _loadingSpinnerService:TerraLoadingSpinnerService,
+                private _http:Http)
     {
-        super(loadingBarService, http, '/rest/');
+        super(_loadingSpinnerService, _http, '/rest/');
     }
     
     // TODO set parameter for paypal plus installment

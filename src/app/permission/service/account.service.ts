@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import {
-    TerraLoadingBarService,
-    TerraBaseService
+    TerraBaseService,
+    TerraLoadingSpinnerService
 } from '@plentymarkets/terra-components';
 import { Observable } from 'rxjs';
 import { AccountInterface } from './data/account.interface';
@@ -10,10 +10,10 @@ import { AccountInterface } from './data/account.interface';
 @Injectable()
 export class AccountService extends TerraBaseService
 {
-    constructor(loadingBarService:TerraLoadingBarService, http:Http)
+    constructor(private _loadingSpinnerService:TerraLoadingSpinnerService,
+                private _http:Http)
     {
-        //super(loadingBarService, http, 'http://master.plentymarkets.com/rest/payment/payPal/');
-        super(loadingBarService, http, '/rest/payment/payPal/');
+        super(_loadingSpinnerService, _http, '/rest/payment/payPal/');
     }
     
     public getAccounts():Observable<Array<AccountInterface>>

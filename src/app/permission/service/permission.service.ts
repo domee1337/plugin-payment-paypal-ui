@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import {
     TerraSplitViewInterface,
     TerraBaseService,
-    TerraLoadingBarService,
-    TerraLeafInterface
-} from "@plentymarkets/terra-components";
-import { Http } from "@angular/http";
-import { Observable } from "rxjs";
+    TerraLeafInterface,
+    TerraLoadingSpinnerService
+} from '@plentymarkets/terra-components';
+import { Http } from '@angular/http';
+import { Observable } from 'rxjs';
 import { AccountDetailViewModule } from '../views/account-detail-view/account-detail-view.module';
 import { AccountInterface } from './data/account.interface';
 
@@ -18,11 +18,10 @@ export class PermissionService extends TerraBaseService
     private _currentAccountId:number;
     private _accountList:Array<TerraLeafInterface> = [];
     
-    constructor(loadingBarService:TerraLoadingBarService, http:Http)
+    constructor(private _loadingSpinnerService:TerraLoadingSpinnerService,
+                private _http:Http)
     {
-        //super(loadingBarService, http, 'http://master.plentymarkets.com/rest/payment/payPal/');
-        super(loadingBarService, http, '/rest/payment/payPal/');
-
+        super(_loadingSpinnerService, _http, '/rest/payment/payPal/');
     }
     
     public get modules():Array<TerraSplitViewInterface>

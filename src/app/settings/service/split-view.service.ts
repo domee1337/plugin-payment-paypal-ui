@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
-import {
-    TerraSplitViewInterface,
-} from "@plentymarkets/terra-components";
+import { TerraSplitViewInterface } from '@plentymarkets/terra-components';
 
 @Injectable()
 export class SplitViewService
 {
-    
     private _modules:Array<TerraSplitViewInterface> = [];
     
     public get modules():Array<TerraSplitViewInterface>
@@ -46,5 +43,4 @@ export class SplitViewService
         
         this._modules.push(module);
     }
-    
 }
