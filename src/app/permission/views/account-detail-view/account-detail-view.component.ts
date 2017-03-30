@@ -125,8 +125,8 @@ export class AccountDetailViewComponent extends Locale implements OnInit
         this.isLoading = true;
         this.payPalUiComponent.callLoadingEvent(true);
         
-        let data = {accountId: this._permissionService.currentAccount.id};
-
+        let data = {accountId: this._permissionService.currentAccountId};
+        
         this.service.deleteAccount(data).subscribe(
             response =>
             {
