@@ -190,24 +190,27 @@ export class SettingViewComponent extends Locale implements OnInit
         
         this.loadAccounts();
     }
-    
+
     public loadAccounts()
     {
         this.payPalUiComponent.callLoadingEvent(true);
-        
+
         this.service
             .getAccounts()
             .subscribe(response =>
                        {
                            let items = [];
-            
-                           response.forEach((acc) =>
-                                            {
-                                                items.push({
-                                                               value:   acc.id,
-                                                               caption: acc.email
-                                                           });
-                                            });
+
+                           for(let accountId in response)
+                           {
+                               if(response.hasOwnProperty(accountId))
+                               {
+                                   items.push({
+                                       value:   accountId,
+                                       caption: response[accountId].email
+                                   });
+                               }
+                           }
             
                            this._accountListValues = items;
             
