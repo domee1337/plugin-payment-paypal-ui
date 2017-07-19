@@ -445,7 +445,7 @@ export class SettingViewComponent extends Locale implements OnInit
                 this.infoPage = this.settings.webstore[store].language[this.selectLang].infoPage;
                 this._displayNameValue = this.settings.webstore[store].language[this.selectLang].name;
                 this.logo = this.settings.webstore[store].language[this.selectLang].logo;
-                this.logo = this.settings.webstore[store].language[this.selectLang].description;
+                this.description = this.settings.webstore[store].language[this.selectLang].description;
             }
             else
             {
