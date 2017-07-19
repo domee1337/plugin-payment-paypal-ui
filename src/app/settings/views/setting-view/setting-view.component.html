@@ -11,7 +11,7 @@
             </div>
         </terra-base-toolbar>
     </div>
-    
+
     <div style="margin-top: 10px;">
         <terra-portlet inputPortletHeader="{{'general'| translate:lang}}">
             <div class="row-container" style="margin-top: 10px;">
@@ -38,7 +38,7 @@
             </div>
         </terra-portlet>
     </div>
-    
+
     <div *ngIf="payPalMode == 'paypal'">
         <terra-portlet inputPortletHeader="{{ 'PayPal PLUS' | translate:lang }}">
             <div class="row-container">
@@ -61,7 +61,7 @@
             </div>
         </terra-portlet>
     </div>
-    
+
     <div>
         <terra-portlet inputPortletHeader="{{'languageSettings' | translate:lang}}">
             <div class="row-container" style="margin-top: 10px;">
@@ -83,9 +83,9 @@
                                       [inputIsDisabled]="isLoading">
                     </terra-select-box>
                 </div>
-            
+
             </div>
-            
+
             <div class="row-container">
                 <div style="width: 50%; padding-left: 10px;">
                     <terra-text-input [(ngModel)]="_displayNameValue"
@@ -102,10 +102,18 @@
                     </terra-select-box>
                 </div>
             </div>
-        
+
+            <div class="row-container">
+                <div style="width: 100%; padding: 0 10px;">
+                  <terra-text-input [(ngModel)]="description"
+                                    inputName="{{ 'description' | translate:lang }}"
+                                    [inputIsDisabled]="false"></terra-text-input>
+                </div>
+            </div>
+
         </terra-portlet>
     </div>
-    
+
     <div class="row-container">
         <div style="width: 50%;">
             <terra-multi-select-box
@@ -122,7 +130,7 @@
                 <terra-double-input [(ngModel)]="markup.webstore.flatDomestic"
                                     inputName="{{ 'flatDomestic' | translate:lang }}"
                                     [inputIsDisabled]="isLoading">
-                
+
                 </terra-double-input>
                 <terra-double-input [(ngModel)]="markup.webstore.percentageDomestic"
                                     inputName="{{ 'percentageDomestic' | translate:lang }}"
