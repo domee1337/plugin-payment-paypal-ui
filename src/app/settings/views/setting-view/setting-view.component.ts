@@ -125,6 +125,8 @@ export class SettingViewComponent extends Locale implements OnInit
         this.hideExternalInfoPage = false;
         this.hideInternalInfoPage = true;
 
+        this.externalInfoPage = '';
+        this.internalInfoPage = '';
         this.description = '';
 
         this.logoValues = [
@@ -378,6 +380,21 @@ export class SettingViewComponent extends Locale implements OnInit
                       }
                     }
 
+                    if('internalInfoPage' in aktStore)
+                    {
+                        for(let lang in aktStore.language){
+                            settings.webstore[store].language[lang].internalInfoPage = aktStore.internalInfoPage;
+                        }
+                    }
+
+                    if('externalInfoPage' in aktStore)
+                    {
+                        for(let lang in aktStore.language){
+                            settings.webstore[store].language[lang].externalInfoPage = aktStore.externalInfoPage;
+                        }
+                    }
+
+
                     if('infoPageType' in aktStore)
                     {
                       settings.infoPageType = aktStore.infoPageType;
@@ -457,6 +474,8 @@ export class SettingViewComponent extends Locale implements OnInit
                 this._displayNameValue = this.settings.webstore[store].language[this.selectLang].name;
                 this.logo = this.settings.webstore[store].language[this.selectLang].logo;
                 this.description = this.settings.webstore[store].language[this.selectLang].description;
+                this.internalInfoPage = this.settings.webstore[store].language[this.selectLang].internalInfoPage;
+                this.externalInfoPage = this.settings.webstore[store].language[this.selectLang].externalInfoPage;
             }
             else
             {
@@ -464,7 +483,11 @@ export class SettingViewComponent extends Locale implements OnInit
                 this.logo = "0";
                 this._displayNameValue = "";
                 this.description = '';
+                this.internalInfoPage = '';
+                this.externalInfoPage = '';
             }
+
+            this.onInfoPageChange(this.infoPageType);
 
             this._selectedAccount = this.settings.webstore[store].account;
 
@@ -604,14 +627,14 @@ export class SettingViewComponent extends Locale implements OnInit
         this.setCurrentData();
     }
 
-    private onInfoPageChange(event:TerraSelectBoxValueInterface)
+    private onInfoPageChange(value)
     {
-        this.infoPageType = event.value;
-        if(this.infoPageType  === 1){
+        this.infoPageType = value;
+        if(this.infoPageType  == 1){
           this.hideExternalInfoPage = true;
           this.hideInternalInfoPage = false;
         }
-        if(this.infoPageType === 2){
+        if(this.infoPageType == 2){
           this.hideExternalInfoPage = false;
           this.hideInternalInfoPage = true;
         }
@@ -627,7 +650,9 @@ export class SettingViewComponent extends Locale implements OnInit
                 {
                     name:     '',
                     logo:     '',
-                    description: ''
+                    description: '',
+                    internalInfoPage: '',
+                    externalInfoPage: ''
                 };
         }
     }
@@ -679,6 +704,8 @@ export class SettingViewComponent extends Locale implements OnInit
         this.settings.webstore["PID_" + this.webstore].language[this.selectLang].name = this._displayNameValue;
         this.settings.webstore["PID_" + this.webstore].language[this.selectLang].logo = this.logo;
         this.settings.webstore["PID_" + this.webstore].language[this.selectLang].description = this.description;
+        this.settings.webstore["PID_" + this.webstore].language[this.selectLang].internalInfoPage = this.internalInfoPage;
+        this.settings.webstore["PID_" + this.webstore].language[this.selectLang].externalInfoPage = this.externalInfoPage;
     }
 
     private setMarkupData()

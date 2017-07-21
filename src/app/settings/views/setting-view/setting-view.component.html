@@ -81,7 +81,7 @@
                                       [inputListBoxValues]="infoPageValues"
                                       [(ngModel)]="infoPageType"
                                       [inputIsDisabled]="isLoading"
-                                      (outputValueChanged)="onInfoPageChange($event)"
+                                      (outputValueChanged)="onInfoPageChange($event.value)"
                                       inputTooltipText="{{ 'infoPage' | translate:lang }}"
                                       inputTooltipPlacement="top">
                     </terra-select-box>
@@ -91,7 +91,7 @@
                                       [inputIsDisabled]="isLoading"
                                       [hidden]="hideExternalInfoPage"></terra-text-input>
 
-                    <terra-number-input [(ngModel)]="internallInfoPage"
+                    <terra-number-input [(ngModel)]="internalInfoPage"
                                       inputName="{{ 'internalInfoPage' | translate:lang }}"
                                       [inputIsDisabled]="isLoading"
                                       [hidden]="hideInternalInfoPage"></terra-number-input>
