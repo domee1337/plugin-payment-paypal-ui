@@ -29,7 +29,11 @@ export class SettingViewComponent extends Locale implements OnInit
     private webstore;
     private name;
     private logo;
-    private infoPage;
+    private infoPageType;
+    private externalInfoPage;
+    private hideExternalInfoPage;
+    private internalInfoPage;
+    private hideInternalInfoPage;
     private description;
     private markup;
 
@@ -108,10 +112,6 @@ export class SettingViewComponent extends Locale implements OnInit
 
         this.infoPageValues = [
             {
-                value:   '0',
-                caption: '---'
-            },
-            {
                 value:   '1',
                 caption: this.localization.translate('internalInfoPage')
             },
@@ -120,6 +120,10 @@ export class SettingViewComponent extends Locale implements OnInit
                 caption: this.localization.translate('externalInfoPage')
             }
         ];
+
+        this.infoPageType = 2;
+        this.hideExternalInfoPage = false;
+        this.hideInternalInfoPage = true;
 
         this.description = '';
 
@@ -369,7 +373,14 @@ export class SettingViewComponent extends Locale implements OnInit
 
                     if('description' in aktStore)
                     {
-                      settings.webstore[store].description = aktStore.description;
+                      for(let lang in aktStore.language){
+                        settings.webstore[store].language[lang].description = aktStore.description;
+                      }
+                    }
+
+                    if('infoPageType' in aktStore)
+                    {
+                      settings.infoPageType = aktStore.infoPageType;
                     }
                 }
             }
@@ -404,7 +415,7 @@ export class SettingViewComponent extends Locale implements OnInit
                     account:           0,
                     payPalPlus:        0,
                     calcFinancing:     0,
-                    description:       '',
+                    infoPageType:      2
                 };
         }
     }
@@ -422,6 +433,7 @@ export class SettingViewComponent extends Locale implements OnInit
         if(store in this.settings.webstore)
         {
             this._selectedPriority = this.settings.webstore[store].priority;
+            this.infoPageType = this.settings.webstore[store].infoPageType;
 
             this.markup = {
                 webstore:  {
@@ -442,14 +454,13 @@ export class SettingViewComponent extends Locale implements OnInit
 
             if(this.selectLang in this.settings.webstore[store].language)
             {
-                this.infoPage = this.settings.webstore[store].language[this.selectLang].infoPage;
                 this._displayNameValue = this.settings.webstore[store].language[this.selectLang].name;
                 this.logo = this.settings.webstore[store].language[this.selectLang].logo;
-                this.description = this.settings.webstore[store].description;
+                this.description = this.settings.webstore[store].language[this.selectLang].description;
             }
             else
             {
-                this.infoPage = "0";
+                this.infoPageType = 2;
                 this.logo = "0";
                 this._displayNameValue = "";
                 this.description = '';
@@ -524,6 +535,7 @@ export class SettingViewComponent extends Locale implements OnInit
         this._payPalInstallment = false;
         this._displayNameValue = "";
         this._selectedShippingCountry = [];
+        this.infoPageType = 2;
 
         this.markup = {
             webstore:  {
@@ -592,6 +604,19 @@ export class SettingViewComponent extends Locale implements OnInit
         this.setCurrentData();
     }
 
+    private onInfoPageChange(event:TerraSelectBoxValueInterface)
+    {
+        this.infoPageType = event.value;
+        if(this.infoPageType  === 1){
+          this.hideExternalInfoPage = true;
+          this.hideInternalInfoPage = false;
+        }
+        if(this.infoPageType === 2){
+          this.hideExternalInfoPage = false;
+          this.hideInternalInfoPage = true;
+        }
+    }
+
     private checkLanguageExist(webstore, language)
     {
         this.checkWebstoreExist(webstore);
@@ -602,7 +627,7 @@ export class SettingViewComponent extends Locale implements OnInit
                 {
                     name:     '',
                     logo:     '',
-                    infoPage: ''
+                    description: ''
                 };
         }
     }
@@ -620,6 +645,7 @@ export class SettingViewComponent extends Locale implements OnInit
         this.settings.webstore["PID_" + this.webstore].priority = this._selectedPriority;
         this.settings.webstore["PID_" + this.webstore].shippingCountries = this._selectedShippingCountry;
         this.settings.webstore["PID_" + this.webstore].account = this._selectedAccount;
+        this.settings.webstore["PID_" + this.webstore].infoPageType = this.infoPageType;
 
         if(this._payPalPlus == true)
         {
@@ -652,7 +678,6 @@ export class SettingViewComponent extends Locale implements OnInit
          */
         this.settings.webstore["PID_" + this.webstore].language[this.selectLang].name = this._displayNameValue;
         this.settings.webstore["PID_" + this.webstore].language[this.selectLang].logo = this.logo;
-        this.settings.webstore["PID_" + this.webstore].language[this.selectLang].infoPage = this.infoPage;
         this.settings.webstore["PID_" + this.webstore].language[this.selectLang].description = this.description;
     }
 
