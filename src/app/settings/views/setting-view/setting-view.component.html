@@ -75,13 +75,34 @@
                     </terra-select-box>
                 </div>
                 <div style="width: 50%; padding: 0 10px;">
+
+
                     <terra-select-box inputName="{{ 'infoPage' | translate:lang }}"
                                       [inputListBoxValues]="infoPageValues"
+                                      [(ngModel)]="infoPageType"
+                                      [inputIsDisabled]="isLoading"
+                                      (outputValueChanged)="onInfoPageChange($event)"
                                       inputTooltipText="{{ 'infoPage' | translate:lang }}"
-                                      inputTooltipPlacement="top"
-                                      [(ngModel)]="infoPage"
-                                      [inputIsDisabled]="isLoading">
+                                      inputTooltipPlacement="top">
                     </terra-select-box>
+
+                    <terra-text-input [(ngModel)]="externalInfoPage"
+                                      inputName="{{ 'externalInfoPage' | translate:lang }}"
+                                      [inputIsDisabled]="isLoading"
+                                      [hidden]="hideExternalInfoPage"></terra-text-input>
+
+                    <terra-number-input [(ngModel)]="internallInfoPage"
+                                      inputName="{{ 'internalInfoPage' | translate:lang }}"
+                                      [inputIsDisabled]="isLoading"
+                                      [hidden]="hideInternalInfoPage"></terra-number-input>
+            <!--<div class="mBot">
+              <terra-button class="mb-2" inputIcon="icon-search"
+                            [hidden]="hideInternalInfoPage"
+                            inputCaption="{{ 'internalInfoPage' | translate:lang }}"
+                            [inputIsDisabled]="isLoading"
+                            (outputClicked)="selectCategory()"></terra-button>
+            </div>-->
+
                 </div>
 
             </div>
