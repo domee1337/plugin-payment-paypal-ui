@@ -380,6 +380,13 @@ export class SettingViewComponent extends Locale implements OnInit
                       }
                     }
 
+                    if('infoPageType' in aktStore)
+                    {
+                        for(let lang in aktStore.language){
+                            settings.webstore[store].language[lang].infoPageType = aktStore.infoPageType;
+                        }
+                    }
+
                     if('internalInfoPage' in aktStore)
                     {
                         for(let lang in aktStore.language){
@@ -394,11 +401,6 @@ export class SettingViewComponent extends Locale implements OnInit
                         }
                     }
 
-
-                    if('infoPageType' in aktStore)
-                    {
-                      settings.infoPageType = aktStore.infoPageType;
-                    }
                 }
             }
         }
@@ -450,7 +452,6 @@ export class SettingViewComponent extends Locale implements OnInit
         if(store in this.settings.webstore)
         {
             this._selectedPriority = this.settings.webstore[store].priority;
-            this.infoPageType = this.settings.webstore[store].infoPageType;
 
             this.markup = {
                 webstore:  {
@@ -474,6 +475,7 @@ export class SettingViewComponent extends Locale implements OnInit
                 this._displayNameValue = this.settings.webstore[store].language[this.selectLang].name;
                 this.logo = this.settings.webstore[store].language[this.selectLang].logo;
                 this.description = this.settings.webstore[store].language[this.selectLang].description;
+                this.infoPageType = this.settings.webstore[store].language[this.selectLang].infoPageType;
                 this.internalInfoPage = this.settings.webstore[store].language[this.selectLang].internalInfoPage;
                 this.externalInfoPage = this.settings.webstore[store].language[this.selectLang].externalInfoPage;
             }
@@ -651,6 +653,7 @@ export class SettingViewComponent extends Locale implements OnInit
                     name:     '',
                     logo:     '',
                     description: '',
+                    infoPageType: 2,
                     internalInfoPage: '',
                     externalInfoPage: ''
                 };
@@ -670,7 +673,6 @@ export class SettingViewComponent extends Locale implements OnInit
         this.settings.webstore["PID_" + this.webstore].priority = this._selectedPriority;
         this.settings.webstore["PID_" + this.webstore].shippingCountries = this._selectedShippingCountry;
         this.settings.webstore["PID_" + this.webstore].account = this._selectedAccount;
-        this.settings.webstore["PID_" + this.webstore].infoPageType = this.infoPageType;
 
         if(this._payPalPlus == true)
         {
@@ -704,6 +706,7 @@ export class SettingViewComponent extends Locale implements OnInit
         this.settings.webstore["PID_" + this.webstore].language[this.selectLang].name = this._displayNameValue;
         this.settings.webstore["PID_" + this.webstore].language[this.selectLang].logo = this.logo;
         this.settings.webstore["PID_" + this.webstore].language[this.selectLang].description = this.description;
+        this.settings.webstore["PID_" + this.webstore].language[this.selectLang].infoPageType = this.infoPageType;
         this.settings.webstore["PID_" + this.webstore].language[this.selectLang].internalInfoPage = this.internalInfoPage;
         this.settings.webstore["PID_" + this.webstore].language[this.selectLang].externalInfoPage = this.externalInfoPage;
     }
